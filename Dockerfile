@@ -4,6 +4,8 @@ RUN apt-get update
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install git mercurial curl rsync ruby sudo
 
+ENV CI true
+
 #
 # Install Bitrise CLI
 RUN curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.2.1/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise

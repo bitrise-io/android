@@ -1,3 +1,3 @@
 # docker-android
 
-Android Docker image
+Android Docker image, based on `bitriseio/docker-bitrise-base`

@@ -1,0 +1,5 @@
+app:
+  build: .
+  command: bitrise --version
+  volumes:
+    - ./_tmp:/bitrise/tmp

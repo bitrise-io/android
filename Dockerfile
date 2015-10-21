@@ -37,11 +37,5 @@ RUN sudo apt-get update
 RUN sudo apt-get -y install gradle
 
 RUN gradle -v
-# RUN mkdir -p /bitrise
-
-RUN apt-get -y install golang
-
-COPY ./bitrise /bitrise
-WORKDIR /bitrise
 
 CMD ls -alh

@@ -1,41 +1,66 @@
 FROM bitriseio/docker-bitrise-base:latest
 
+ENV ANDROID_HOME /opt/android-sdk-linux
 
-# # Install java7
-RUN apt-get install -y software-properties-common && add-apt-repository -y ppa:webupd8team/java && apt-get update
-RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN apt-get install -y oracle-java7-installer
 
-# # Install Deps
-RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y --force-yes expect git wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 python curl
+# ------------------------------------------------------
+# --- Install required tools
+
+RUN apt-get update -qq
+
+# Base (non android specific) tools
+# -> should be added to bitriseio/docker-bitrise-base
+
+# Dependencies to execute Android builds
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
+
+
+# ------------------------------------------------------
+# --- Download Android SDK tools into $ANDROID_HOME
+
+RUN cd /opt && wget -q https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz -O android-sdk.tgz
+RUN cd /opt && tar -xvzf android-sdk.tgz
+RUN cd /opt && rm -f android-sdk.tgz
+
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+
+# ------------------------------------------------------
+# --- Install Android SDKs and other build packages
+
+# Other tools and resources of Android SDK
+#  you should only install the packages you need!
+# To get a full list of available options you can use:
+#  android list sdk --no-ui --all --extended
+RUN echo y | android update sdk --no-ui --all --force --filter \
+  platform-tools,extra-android-support
+# build tools
+RUN echo y | android update sdk --no-ui --all --force --filter \
+  build-tools-19.1.0,build-tools-22.0.1,build-tools-23.0.1
 #
-# # Install Android SDK
-RUN cd /opt && wget --output-document=android-sdk.tgz --quiet http://dl.google.com/android/android-sdk_r24.3.3-linux.tgz && tar xzf android-sdk.tgz && rm -f android-sdk.tgz && chown -R root.root android-sdk-linux
+RUN echo y | android update sdk --no-ui --all --force --filter \
+  addon-google_apis-google-23,sys-img-armeabi-v7a-android-23
+# SDKs
+RUN echo y | android update sdk --no-ui --all --force --filter \
+  android-19,android-22,android-23
+# Extras
+RUN echo y | android update sdk --no-ui --all --force --filter \
+  extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
 
-# WORKDIR     /opt/
+
+# ------------------------------------------------------
+# --- Install Gradle from PPA
+
+# Gradle PPA
+RUN add-apt-repository ppa:cwchien/gradle
 RUN apt-get update
-RUN apt-get -f install
-RUN apt-get install wget
-RUN apt-get install unzip
-
-RUN         wget http://dl.google.com/android/android-sdk_r24.3.4-linux.tgz
-RUN         tar -xvf android-sdk_r24.3.4-linux.tgz
-RUN         mv android-sdk-linux /opt/android-sdk && \
-            rm android-sdk_r24.3.4-linux.tgz
-
-ENV         ANDROID_HOME /opt/android-sdk
-ENV         PATH $PATH:$ANDROID_HOME/tools
-ENV         PATH $PATH:$ANDROID_HOME/platform-tools
-COPY tools /opt/tools
-ENV PATH ${PATH}:/opt/tools
-
-RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --all --no-ui --filter platform-tools,tools,build-tools-21,build-tools-21.0.1,build-tools-21.0.2,build-tools-21.1,build-tools-21.1.1,build-tools-21.1.2,build-tools-22,build-tools-22.0.1,android-21,android-22,addon-google_apis_x86-google-21,extra-android-support,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services,sys-img-armeabi-v7a-android-21"]
-
-RUN sudo add-apt-repository ppa:cwchien/gradle
-RUN sudo apt-get update
-# answer licence accept prompt with yes
-RUN sudo apt-get -y install gradle
-
+RUN apt-get -y install gradle
 RUN gradle -v
 
-CMD ls -alh
+# ------------------------------------------------------
+# --- Cleanup and rev num
+
+# Cleaning
+RUN apt-get clean
+
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 2
+CMD bitrise -version

@@ -31,19 +31,19 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 #  you should only install the packages you need!
 # To get a full list of available options you can use:
 #  android list sdk --no-ui --all --extended
-RUN echo y | android update sdk --no-ui --all --force --filter \
+RUN echo y | android update sdk --no-ui --all --filter \
   platform-tools,extra-android-support
 # build tools
-RUN echo y | android update sdk --no-ui --all --force --filter \
+RUN echo y | android update sdk --no-ui --all --filter \
   build-tools-19.1.0,build-tools-22.0.1,build-tools-23.0.1
 #
-RUN echo y | android update sdk --no-ui --all --force --filter \
+RUN echo y | android update sdk --no-ui --all --filter \
   addon-google_apis-google-23,sys-img-armeabi-v7a-android-23
 # SDKs
-RUN echo y | android update sdk --no-ui --all --force --filter \
+RUN echo y | android update sdk --no-ui --all --filter \
   android-19,android-22,android-23
 # Extras
-RUN echo y | android update sdk --no-ui --all --force --filter \
+RUN echo y | android update sdk --no-ui --all --filter \
   extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
 
 

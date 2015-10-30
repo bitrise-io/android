@@ -33,20 +33,25 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 #  android list sdk --no-ui --all --extended
 RUN echo y | android update sdk --no-ui --all --filter \
   platform-tools,extra-android-support
+
 # google apis
+# Please keep these in descending order!
 RUN echo y | android update sdk --no-ui --all --filter \
-  addon-google_apis-google-21,addon-google_apis-google-22,addon-google_apis-google-23
+  addon-google_apis-google-23,addon-google_apis-google-22,addon-google_apis-google-21
 
 # SDKs
+# Please keep these in descending order!
 RUN echo y | android update sdk --no-ui --all --filter \
-  android-10,android-15,android-17,android-19,android-20,android-21,android-22,android-23
+  android-23,android-22,android-21,android-20,android-19,android-17,android-15,android-10
 # build tools
+# Please keep these in descending order!
 RUN echo y | android update sdk --no-ui --all --filter \
-  build-tools-17.0.0,build-tools-19.1.0,build-tools-20.0.0,build-tools-21.1.2,build-tools-22.0.1,build-tools-23.0.2
+  build-tools-23.0.2,build-tools-22.0.1,build-tools-21.1.2,build-tools-20.0.0,build-tools-19.1.0,build-tools-17.0.0
 
 # Android System Images, for emulators
+# Please keep these in descending order!
 RUN echo y | android update sdk --no-ui --all --filter \
-  sys-img-armeabi-v7a-android-15,sys-img-armeabi-v7a-android-16,sys-img-armeabi-v7a-android-17,sys-img-armeabi-v7a-android-19,sys-img-armeabi-v7a-android-21,sys-img-armeabi-v7a-android-22,sys-img-armeabi-v7a-android-23
+  sys-img-armeabi-v7a-android-23,sys-img-armeabi-v7a-android-22,sys-img-armeabi-v7a-android-21,sys-img-armeabi-v7a-android-19,sys-img-armeabi-v7a-android-17,sys-img-armeabi-v7a-android-16,sys-img-armeabi-v7a-android-15
 
 # Extras
 RUN echo y | android update sdk --no-ui --all --filter \
@@ -68,5 +73,5 @@ RUN gradle -v
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 2
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 3
 CMD bitrise -version

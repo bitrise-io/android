@@ -33,15 +33,21 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 #  android list sdk --no-ui --all --extended
 RUN echo y | android update sdk --no-ui --all --filter \
   platform-tools,extra-android-support
-# build tools
+# google apis
 RUN echo y | android update sdk --no-ui --all --filter \
-  build-tools-19.1.0,build-tools-22.0.1,build-tools-23.0.1
-#
-RUN echo y | android update sdk --no-ui --all --filter \
-  addon-google_apis-google-23,sys-img-armeabi-v7a-android-23
+  addon-google_apis-google-21,addon-google_apis-google-22,addon-google_apis-google-23
+
 # SDKs
 RUN echo y | android update sdk --no-ui --all --filter \
-  android-19,android-22,android-23
+  android-10,android-15,android-17,android-19,android-20,android-21,android-22,android-23
+# build tools
+RUN echo y | android update sdk --no-ui --all --filter \
+  build-tools-17.0.0,build-tools-19.1.0,build-tools-20.0.0,build-tools-21.1.2,build-tools-22.0.1,build-tools-23.0.2
+
+# Android System Images, for emulators
+RUN echo y | android update sdk --no-ui --all --filter \
+  sys-img-armeabi-v7a-android-15,sys-img-armeabi-v7a-android-16,sys-img-armeabi-v7a-android-17,sys-img-armeabi-v7a-android-23
+
 # Extras
 RUN echo y | android update sdk --no-ui --all --filter \
   extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services

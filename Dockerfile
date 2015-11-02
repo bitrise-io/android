@@ -68,10 +68,19 @@ RUN apt-get -y install gradle
 RUN gradle -v
 
 # ------------------------------------------------------
+# --- Install Maven 3 from PPA
+
+RUN apt-get purge maven maven2
+RUN add-apt-repository ppa:andrei-pozolotin/maven3
+RUN apt-get update
+RUN apt-get -y install maven3
+RUN mvn --version
+
+# ------------------------------------------------------
 # --- Cleanup and rev num
 
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 3
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 4
 CMD bitrise -version

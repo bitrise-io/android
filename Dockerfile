@@ -59,6 +59,25 @@ RUN echo y | android update sdk --no-ui --all --filter \
 
 
 # ------------------------------------------------------
+# --- Android NDK
+
+# download
+RUN mkdir /opt/android-ndk-tmp
+RUN cd /opt/android-ndk-tmp && wget -q http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin
+# uncompress
+RUN cd /opt/android-ndk-tmp && chmod a+x ./android-ndk-r10e-linux-x86_64.bin
+RUN cd /opt/android-ndk-tmp && ./android-ndk-r10e-linux-x86_64.bin
+# move to it's final location
+RUN cd /opt/android-ndk-tmp && mv ./android-ndk-r10e /opt/android-ndk
+# remove temp dir
+RUN rm -rf /opt/android-ndk-tmp
+# set the related ENV
+ENV ANDROID_NDK_HOME /opt/android-ndk
+# add to PATH
+ENV PATH ${PATH}:${ANDROID_NDK_HOME}
+
+
+# ------------------------------------------------------
 # --- Install Gradle from PPA
 
 # Gradle PPA
@@ -82,5 +101,5 @@ RUN mvn --version
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 4
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 5
 CMD bitrise -version

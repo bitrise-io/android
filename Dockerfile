@@ -46,7 +46,7 @@ RUN echo y | android update sdk --no-ui --all --filter \
 # build tools
 # Please keep these in descending order!
 RUN echo y | android update sdk --no-ui --all --filter \
-  build-tools-23.0.2,build-tools-22.0.1,build-tools-21.1.2,build-tools-20.0.0,build-tools-19.1.0,build-tools-17.0.0
+  build-tools-23.0.2,build-tools-23.0.1,build-tools-22.0.1,build-tools-21.1.2,build-tools-20.0.0,build-tools-19.1.0,build-tools-17.0.0
 
 # Android System Images, for emulators
 # Please keep these in descending order!
@@ -82,5 +82,5 @@ RUN mvn --version
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 6
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 2016_01_09_1
 CMD bitrise -version

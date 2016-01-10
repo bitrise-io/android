@@ -1,6 +1,22 @@
 # docker-android
 
-Android Docker image, based on `bitriseio/docker-bitrise-base`
+Android Docker image, based on the Bitrise Base Docker
+image ( https://github.com/bitrise-docker/android / `bitriseio/docker-bitrise-base` ),
+and extends it with pre-installed Android tools/setup.
+
+This docker image is pre-cached on the related [bitrise.io](https://www.bitrise.io)
+Virtual Machines.
+
+**If you'd like to add a tool** to be pre-installed you can create a
+Pull Request, adding your changes to the `Dockerfile` of this repository.
+*Please also add* a related test/report to the `system_report.sh` file,
+which is used to test & list the pre-installed tools.
+
+When a new version of this stack is available on [bitrise.io](https://www.bitrise.io)
+we'll run `system_report.sh` and post the result into
+the [bitrise.io GitHub repository](https://github.com/bitrise-io/bitrise.io), under the `system_reports` folder. The `system_report.sh` script can be run with `docker-compose` locally too,
+with: `docker-compose run --rm app bash system_report.sh`.
+
 
 ## docker-compose template
 

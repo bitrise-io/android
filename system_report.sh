@@ -35,6 +35,9 @@ echo
 echo "* extras:"
 tree -L 2 ${ANDROID_HOME}/extras
 echo
+echo "* extra-android-support package version:"
+cat $ANDROID_HOME/extras/android/support/source.properties | grep 'Pkg.Revision='
+echo
 echo "* platforms:"
 ls -1 ${ANDROID_HOME}/platforms
 echo

@@ -1,3 +1,4 @@
 _tmp
 Vagrantfile
 .vagrant
+.bitrise*

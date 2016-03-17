@@ -1,0 +1,98 @@
+---
+format_version: 1.1.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+app:
+  envs:
+  - DOCKERHUB_IMG_ID: bitriseio/android
+  - DOCKERHUB_BASE_IMG_ID: bitriseio/docker-bitrise-base:latest
+  # define in .bitrise.secrets.yml
+  - DOCKER_LOGIN_EMAIL: $DOCKER_LOGIN_EMAIL
+  - DOCKER_LOGIN_USER: $DOCKER_LOGIN_USER
+  - DOCKER_LOGIN_PASS: $DOCKER_LOGIN_PASS
+workflows:
+  rebuild:
+    steps:
+    - script@1.1.0:
+        title: docker pull/update base
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+
+            docker pull "${DOCKERHUB_BASE_IMG_ID}"
+    - script@1.1.0:
+        title: docker infos & images
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+
+            docker images
+            df -kh ./
+            docker info
+    - script@1.1.0:
+        title: docker build
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+
+            docker build --no-cache -t "${DOCKERHUB_IMG_ID}:latest" .
+    - script@1.1.0:
+        title: run platform_report.sh
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -x
+
+            docker run --rm -v "$(pwd)/system_report.sh:/bitrise/src/system_report.sh" "${DOCKERHUB_IMG_ID}:latest" bash /bitrise/src/system_report.sh
+
+  deploy:
+    before_run:
+    - rebuild
+    steps:
+    - script@1.1.0:
+        title: docker login
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            echo "=> Docker login..."
+            docker login -e "${DOCKER_LOGIN_EMAIL}" -u "${DOCKER_LOGIN_USER}" -p "${DOCKER_LOGIN_PASS}"
+    - script@1.1.0:
+        title: docker push
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            function docker_push_with_retry {
+              local push_id="$1"
+              echo " => Pushing: ${push_id} ..."
+              docker push "${push_id}"
+              if [ $? -ne 0 ] ; then
+                echo " (!) WARNING: First push attempt failed - retry..."
+                sleep 10
+                docker push "${push_id}"
+                if [ $? -ne 0 ] ; then
+                  echo " [!] ERROR: Second push attempt failed"
+                  exit 1
+                fi
+              fi
+              echo " => Pushing - OK"
+            }
+
+            if [ ! -z "${BITRISE_GIT_TAG}" ] ; then
+              echo " => Tagging: ${BITRISE_GIT_TAG} ..."
+              docker tag -f "${DOCKERHUB_IMG_ID}:latest" "${DOCKERHUB_IMG_ID}:${BITRISE_GIT_TAG}"
+              if [ $? -ne 0 ] ; then
+                echo " [!] ERROR: failed to tag the image"
+                exit 1
+              fi
+              docker_push_with_retry "${DOCKERHUB_IMG_ID}:${BITRISE_GIT_TAG}"
+            fi
+
+            docker_push_with_retry "${DOCKERHUB_IMG_ID}:latest"

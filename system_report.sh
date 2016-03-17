@@ -28,8 +28,11 @@ echo
 
 echo
 echo "=== Testing Android tools =============="
-echo " * adb"
-ls -alh ${ANDROID_HOME}/platform-tools/adb
+echo " * adb path:"
+which adb
+echo
+echo " * adb version:"
+adb version
 echo "========================================"
 echo
 

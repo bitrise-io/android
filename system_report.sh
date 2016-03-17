@@ -27,7 +27,17 @@ echo "========================================"
 echo
 
 echo
+echo "=== Testing Android tools =============="
+echo " * adb"
+ls -alh ${ANDROID_HOME}/platform-tools/adb
+echo "========================================"
+echo
+
+echo
 echo "=== Android tools/dirs ================="
+echo
+echo "* platform-tools:"
+ls -1 ${ANDROID_HOME}/platform-tools
 echo
 echo "* build-tools:"
 ls -1 ${ANDROID_HOME}/build-tools

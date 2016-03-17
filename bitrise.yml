@@ -3,7 +3,7 @@ format_version: 1.1.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 app:
   envs:
-  - DOCKERHUB_IMG_ID: bitriseio/android
+  - DOCKERHUB_IMG_ID: bitriseio/docker-android
   - DOCKERHUB_BASE_IMG_ID: bitriseio/docker-bitrise-base:latest
   # define in .bitrise.secrets.yml
   - DOCKER_LOGIN_EMAIL: $DOCKER_LOGIN_EMAIL

@@ -41,6 +41,8 @@ workflows:
             set -x
 
             docker build --no-cache -t "${DOCKERHUB_IMG_ID}:latest" .
+
+            docker images
     - script@1.1.0:
         title: run platform_report.sh
         inputs:

@@ -31,31 +31,55 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 #  you should only install the packages you need!
 # To get a full list of available options you can use:
 #  android list sdk --no-ui --all --extended
-RUN echo y | android update sdk --no-ui --all --filter \
-  platform-tools,extra-android-support
+# (!!!) Only install one package at a time, as "echo y" will only work for one license!
+#       If you don't do it this way you might get "Unknown response" in the logs,
+#         but the android SDK tool **won't** fail, it'll just **NOT** install the package.
+RUN echo y | android update sdk --no-ui --all --filter platform-tools
+RUN echo y | android update sdk --no-ui --all --filter extra-android-support
 
 # google apis
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter \
-  addon-google_apis-google-23,addon-google_apis-google-22,addon-google_apis-google-21
+RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-23
+RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-22
+RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-21
 
 # SDKs
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter \
-  android-N,android-23,android-22,android-21,android-20,android-19,android-17,android-15,android-10
+RUN echo y | android update sdk --no-ui --all --filter android-N
+RUN echo y | android update sdk --no-ui --all --filter android-23
+RUN echo y | android update sdk --no-ui --all --filter android-22
+RUN echo y | android update sdk --no-ui --all --filter android-21
+RUN echo y | android update sdk --no-ui --all --filter android-20
+RUN echo y | android update sdk --no-ui --all --filter android-19
+RUN echo y | android update sdk --no-ui --all --filter android-17
+RUN echo y | android update sdk --no-ui --all --filter android-15
+RUN echo y | android update sdk --no-ui --all --filter android-10
+
 # build tools
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter \
-  build-tools-24.0.0-preview,build-tools-23.0.2,build-tools-23.0.1,build-tools-22.0.1,build-tools-21.1.2,build-tools-20.0.0,build-tools-19.1.0,build-tools-17.0.0
+RUN echo y | android update sdk --no-ui --all --filter build-tools-24.0.0-preview
+RUN echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
+RUN echo y | android update sdk --no-ui --all --filter build-tools-23.0.1
+RUN echo y | android update sdk --no-ui --all --filter build-tools-22.0.1
+RUN echo y | android update sdk --no-ui --all --filter build-tools-21.1.2
+RUN echo y | android update sdk --no-ui --all --filter build-tools-20.0.0
+RUN echo y | android update sdk --no-ui --all --filter build-tools-19.1.0
+RUN echo y | android update sdk --no-ui --all --filter build-tools-17.0.0
 
 # Android System Images, for emulators
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter \
-  sys-img-armeabi-v7a-android-23,sys-img-armeabi-v7a-android-22,sys-img-armeabi-v7a-android-21,sys-img-armeabi-v7a-android-19,sys-img-armeabi-v7a-android-17,sys-img-armeabi-v7a-android-16,sys-img-armeabi-v7a-android-15
+RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-23
+RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-22
+RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-21
+RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-19
+RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-17
+RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-16
+RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-15
 
 # Extras
-RUN echo y | android update sdk --no-ui --all --filter \
-  extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services
+RUN echo y | android update sdk --no-ui --all --filter extra-android-m2repository
+RUN echo y | android update sdk --no-ui --all --filter extra-google-m2repository
+RUN echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
 
 
 # ------------------------------------------------------

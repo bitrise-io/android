@@ -22,6 +22,7 @@ echo "=== Pre-installed tool versions ========"
 ver_line="$(gradle --version | grep 'Gradle ')" ;     echo "* Gradle: $ver_line"
 ver_line="$(mvn --version | grep 'Apache Maven')" ;   echo "* Maven: $ver_line"
 ver_line="$( javac -version 2>&1 )" ;                 echo "* Java: $ver_line"
+ver_line="$(mono --version | grep 'Mono JIT ')" ;     echo "* Mono: $ver_line"
 
 echo "========================================"
 echo

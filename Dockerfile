@@ -102,6 +102,12 @@ RUN apt-get -y install maven3
 RUN mvn --version
 
 # ------------------------------------------------------
+# --- Install Fastlane
+
+RUN gem install fastlane --no-document
+RUN fastlane --version
+
+# ------------------------------------------------------
 # --- Cleanup and rev num
 
 # Cleaning

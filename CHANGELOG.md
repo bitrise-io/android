@@ -1,3 +1,7 @@
+## 2016_04_09_1
+
+* `fastlane` pre-installed
+
 ## 2016_03_17_1
 
 * Restructured `Dockerfile` (Android package install related codes), to fix

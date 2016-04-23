@@ -41,7 +41,7 @@ echo
 echo "=== Android tools/dirs ================="
 echo
 echo "* ANDROID_HOME:"
-ls -alh ${ANDROID_HOME}
+ls -a1 ${ANDROID_HOME}
 echo
 echo "* platform-tools:"
 ls -1 ${ANDROID_HOME}/platform-tools

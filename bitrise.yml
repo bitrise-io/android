@@ -4,7 +4,6 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 app:
   envs:
   - DOCKERHUB_IMG_ID: bitriseio/docker-android
-  - DOCKERHUB_BASE_IMG_ID: bitriseio/docker-bitrise-base:latest
   # define in .bitrise.secrets.yml
   - DOCKER_LOGIN_EMAIL: $DOCKER_LOGIN_EMAIL
   - DOCKER_LOGIN_USER: $DOCKER_LOGIN_USER
@@ -12,15 +11,6 @@ app:
 workflows:
   rebuild:
     steps:
-    - script@1.1.0:
-        title: docker pull/update base
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -e
-            set -x
-
-            docker pull "${DOCKERHUB_BASE_IMG_ID}"
     - script@1.1.0:
         title: docker infos & images
         inputs:
@@ -40,7 +30,7 @@ workflows:
             set -e
             set -x
 
-            docker build --no-cache -t "${DOCKERHUB_IMG_ID}:latest" .
+            docker build --pull --no-cache -t "${DOCKERHUB_IMG_ID}:latest" .
 
             docker images
     - script@1.1.0:
@@ -51,7 +41,7 @@ workflows:
             set -e
             set -x
 
-            docker run --rm -v "$(pwd)/system_report.sh:/bitrise/src/system_report.sh" "${DOCKERHUB_IMG_ID}:latest" bash /bitrise/src/system_report.sh
+            docker run --rm -v "$(pwd)/system_report.sh:/bitrise/src/system_report.sh" -v "/var/run/docker.sock:/var/run/docker.sock" "${DOCKERHUB_IMG_ID}:latest" bash /bitrise/src/system_report.sh
 
   deploy:
     before_run:

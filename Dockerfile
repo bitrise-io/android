@@ -1,4 +1,4 @@
-FROM bitriseio/docker-bitrise-base:latest
+FROM bitriseio/docker-bitrise-base:2016_05_14_1
 
 ENV ANDROID_HOME /opt/android-sdk-linux
 
@@ -113,5 +113,5 @@ RUN fastlane --version
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 2016_04_09_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 2016_05_26_1
 CMD bitrise -version

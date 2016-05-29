@@ -1,3 +1,10 @@
+## 2016_05_29_1
+
+* Install `Gradle` from official APT repo, instead of from a PPA
+* Install `Maven` from official APT repo, instead of from a PPA
+* Java (OpenJDK) upgrade from 7 to 8
+
+
 ## 2016_05_26_1
 
 * "Checkpoint", before migration to `ubuntu:16.04`

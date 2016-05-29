@@ -9,6 +9,26 @@ app:
   - DOCKER_LOGIN_USER: $DOCKER_LOGIN_USER
   - DOCKER_LOGIN_PASS: $DOCKER_LOGIN_PASS
 workflows:
+  test:
+    steps:
+    - script@1.1.0:
+        title: docker build
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -ex
+
+            docker build -t "${DOCKERHUB_IMG_ID}:test" .
+
+            docker images
+    - script@1.1.0:
+        title: run platform_report.sh
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -ex
+
+            docker run --rm -v "$(pwd)/system_report.sh:/bitrise/src/system_report.sh" -v "/var/run/docker.sock:/var/run/docker.sock" "${DOCKERHUB_IMG_ID}:test" bash /bitrise/src/system_report.sh
   rebuild:
     steps:
     - script@1.1.0:
@@ -16,8 +36,7 @@ workflows:
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            set -x
+            set -ex
 
             docker images
             df -kh ./
@@ -27,8 +46,7 @@ workflows:
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            set -x
+            set -ex
 
             docker build --pull --no-cache -t "${DOCKERHUB_IMG_ID}:latest" .
 
@@ -38,8 +56,7 @@ workflows:
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            set -x
+            set -ex
 
             docker run --rm -v "$(pwd)/system_report.sh:/bitrise/src/system_report.sh" -v "/var/run/docker.sock:/var/run/docker.sock" "${DOCKERHUB_IMG_ID}:latest" bash /bitrise/src/system_report.sh
 

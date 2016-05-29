@@ -89,7 +89,6 @@ RUN echo y | android update sdk --no-ui --all --filter extra-google-google_play_
 # --- Install Gradle from PPA
 
 # Gradle PPA
-RUN add-apt-repository ppa:cwchien/gradle
 RUN apt-get update
 RUN apt-get -y install gradle
 RUN gradle -v

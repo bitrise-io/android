@@ -98,9 +98,8 @@ RUN gradle -v
 # --- Install Maven 3 from PPA
 
 RUN apt-get purge maven maven2
-RUN add-apt-repository ppa:andrei-pozolotin/maven3
 RUN apt-get update
-RUN apt-get -y install maven3
+RUN apt-get -y install maven
 RUN mvn --version
 
 # ------------------------------------------------------

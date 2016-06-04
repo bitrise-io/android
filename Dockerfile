@@ -39,12 +39,6 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 RUN echo y | android update sdk --no-ui --all --filter platform-tools | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter extra-android-support | grep 'package installed'
 
-# google apis
-# Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-23 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-22 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-21 | grep 'package installed'
-
 # SDKs
 # Please keep these in descending order!
 RUN echo y | android update sdk --no-ui --all --filter android-N | grep 'package installed'
@@ -83,6 +77,12 @@ RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-andro
 RUN echo y | android update sdk --no-ui --all --filter extra-android-m2repository | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter extra-google-m2repository | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter extra-google-google_play_services | grep 'package installed'
+
+# google apis
+# Please keep these in descending order!
+RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-23 | grep 'package installed'
+RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-22 | grep 'package installed'
+RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-21 | grep 'package installed'
 
 
 # ------------------------------------------------------

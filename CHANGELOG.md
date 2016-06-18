@@ -1,3 +1,8 @@
+## 2016_06_18_1
+
+* `android-24` is no longer preview - package names were changed
+
+
 ## 2016_05_29_1
 
 * Install `Gradle` from official APT repo, instead of from a PPA

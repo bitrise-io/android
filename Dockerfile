@@ -41,7 +41,7 @@ RUN echo y | android update sdk --no-ui --all --filter extra-android-support | g
 
 # SDKs
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter android-N | grep 'package installed'
+RUN echo y | android update sdk --no-ui --all --filter android-24 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter android-23 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter android-22 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter android-21 | grep 'package installed'
@@ -53,7 +53,7 @@ RUN echo y | android update sdk --no-ui --all --filter android-10 | grep 'packag
 
 # build tools
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter build-tools-24.0.0-preview | grep 'package installed'
+RUN echo y | android update sdk --no-ui --all --filter build-tools-24.0.0 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter build-tools-23.0.3 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter build-tools-23.0.2 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter build-tools-23.0.1 | grep 'package installed'
@@ -112,5 +112,5 @@ RUN fastlane --version
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 2016_05_29_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID 2016_06_18_1
 CMD bitrise -version

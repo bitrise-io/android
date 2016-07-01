@@ -102,6 +102,6 @@ workflows:
                 exit 1
               fi
               docker_push_with_retry "${DOCKERHUB_IMG_ID}:${BITRISE_GIT_TAG}"
+            else
+              docker_push_with_retry "${DOCKERHUB_IMG_ID}:latest"
             fi
-
-            docker_push_with_retry "${DOCKERHUB_IMG_ID}:latest"

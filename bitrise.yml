@@ -8,33 +8,16 @@ app:
   - DOCKER_LOGIN_EMAIL: $DOCKER_LOGIN_EMAIL
   - DOCKER_LOGIN_USER: $DOCKER_LOGIN_USER
   - DOCKER_LOGIN_PASS: $DOCKER_LOGIN_PASS
+  # on CI
+  - SLACK_WEBHOOK_URL: $SLACK_WEBHOOK_URL
+  - SLACK_CHANNEL: $SLACK_CHANNEL
 workflows:
-  test:
-    steps:
-    - script@1.1.0:
-        title: docker build
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-
-            docker build -t "${DOCKERHUB_IMG_ID}:test" .
-
-            docker images
-    - script@1.1.0:
-        title: run platform_report.sh
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-
-            docker run --rm -v "$(pwd)/system_report.sh:/bitrise/src/system_report.sh" -v "/var/run/docker.sock:/var/run/docker.sock" "${DOCKERHUB_IMG_ID}:test" bash /bitrise/src/system_report.sh
   rebuild:
     steps:
     - script@1.1.0:
         title: docker infos & images
         inputs:
-        - content: |-
+        - content: |
             #!/bin/bash
             set -ex
 
@@ -44,7 +27,7 @@ workflows:
     - script@1.1.0:
         title: docker build
         inputs:
-        - content: |-
+        - content: |
             #!/bin/bash
             set -ex
 
@@ -54,20 +37,43 @@ workflows:
     - script@1.1.0:
         title: run platform_report.sh
         inputs:
-        - content: |-
+        - content: |
             #!/bin/bash
             set -ex
 
             docker run --rm -v "$(pwd)/system_report.sh:/bitrise/src/system_report.sh" -v "/var/run/docker.sock:/var/run/docker.sock" "${DOCKERHUB_IMG_ID}:latest" bash /bitrise/src/system_report.sh
 
+  _generate_image_deploy_tag:
+    steps:
+    - script:
+        inputs:
+        - content: |
+            #!/bin/bash
+            set -ex
+            envman add --key 'DOCKER_IMAGE_DEPLOY_TAG' --value "$(date +%Y_%m_%d-%H_%M)"
+
   deploy:
     before_run:
     - rebuild
+    - _generate_image_deploy_tag
     steps:
+    - slack@2.1.0:
+        run_if: .IsCI
+        inputs:
+        - webhook_url: $SLACK_WEBHOOK_URL
+        - channel: $SLACK_CHANNEL
+        - from_username: "$BITRISE_APP_TITLE - OK"
+        - from_username_on_error: "$BITRISE_APP_TITLE - ERROR"
+        - message: |
+            Started:
+
+            - Build URL: $BITRISE_BUILD_URL
+            - Build Number: $BITRISE_BUILD_NUMBER
+            - Image tag: $DOCKER_IMAGE_DEPLOY_TAG
     - script@1.1.0:
         title: docker login
         inputs:
-        - content: |-
+        - content: |
             #!/bin/bash
             set -e
             echo "=> Docker login..."
@@ -75,7 +81,7 @@ workflows:
     - script@1.1.0:
         title: docker push
         inputs:
-        - content: |-
+        - content: |
             #!/bin/bash
 
             function docker_push_with_retry {
@@ -94,14 +100,32 @@ workflows:
               echo " => Pushing - OK"
             }
 
-            if [ ! -z "${BITRISE_GIT_TAG}" ] ; then
-              echo " => Tagging: ${BITRISE_GIT_TAG} ..."
-              docker tag -f "${DOCKERHUB_IMG_ID}:latest" "${DOCKERHUB_IMG_ID}:${BITRISE_GIT_TAG}"
-              if [ $? -ne 0 ] ; then
-                echo " [!] ERROR: failed to tag the image"
-                exit 1
-              fi
-              docker_push_with_retry "${DOCKERHUB_IMG_ID}:${BITRISE_GIT_TAG}"
-            else
-              docker_push_with_retry "${DOCKERHUB_IMG_ID}:latest"
+            if [ -z "${DOCKER_IMAGE_DEPLOY_TAG}" ] ; then
+              echo " [!] No DOCKER_IMAGE_DEPLOY_TAG specified!"
+              exit 1
             fi
+
+            echo " => Tagging: ${DOCKER_IMAGE_DEPLOY_TAG} ..."
+            docker tag -f "${DOCKERHUB_IMG_ID}:latest" "${DOCKERHUB_IMG_ID}:${DOCKER_IMAGE_DEPLOY_TAG}"
+            if [ $? -ne 0 ] ; then
+              echo " [!] ERROR: failed to tag the image"
+              exit 1
+            fi
+            docker_push_with_retry "${DOCKERHUB_IMG_ID}:${DOCKER_IMAGE_DEPLOY_TAG}"
+            #docker_push_with_retry "${DOCKERHUB_IMG_ID}:latest"
+    - slack@2.1.0:
+        run_if: .IsCI
+        inputs:
+        - webhook_url: $SLACK_WEBHOOK_URL
+        - channel: $SLACK_CHANNEL
+        - from_username: "$BITRISE_APP_TITLE - OK"
+        - from_username_on_error: "$BITRISE_APP_TITLE - ERROR"
+        - message: |
+            Finished:
+
+            - Branch: *$BITRISE_GIT_BRANCH*
+            - Tag: $BITRISE_GIT_TAG
+            - Image tag: $DOCKER_IMAGE_DEPLOY_TAG
+            - Build URL: $BITRISE_BUILD_URL
+            - Build Number: $BITRISE_BUILD_NUMBER
+            - Build Message: $BITRISE_GIT_MESSAGE

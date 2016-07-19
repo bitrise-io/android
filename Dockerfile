@@ -1,4 +1,4 @@
-FROM bitriseio/docker-bitrise-base:latest
+FROM bitriseio/docker-bitrise-base-alpha:latest
 
 ENV ANDROID_HOME /opt/android-sdk-linux
 

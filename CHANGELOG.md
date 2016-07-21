@@ -1,3 +1,8 @@
+## `v2016_07_21_1`
+
+* new preinstalled packages: `build-tools-24.0.1` & `sys-img-armeabi-v7a-android-24`
+
+
 ## `2016_06_18_1`
 
 * `android-24` is no longer preview - package names were changed

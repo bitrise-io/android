@@ -1,3 +1,8 @@
+## `v2016_10_20_1`
+
+* new preinstalled packages: `android-25` & `build-tools-25.0.0`
+
+
 ## `v2016_07_21_1`
 
 * new preinstalled packages: `build-tools-24.0.1` & `sys-img-armeabi-v7a-android-24`

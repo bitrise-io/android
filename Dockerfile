@@ -117,5 +117,5 @@ RUN fastlane --version
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2016_10_20_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2016_11_17_1
 CMD bitrise -version

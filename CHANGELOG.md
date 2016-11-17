@@ -1,3 +1,8 @@
+## `v2016_11_17_1`
+
+* removed `sys-img-armeabi-v7a-android-23` - it seems this Android package was removed from the registry
+
+
 ## `v2016_10_20_1`
 
 * new preinstalled packages: `android-25` & `build-tools-25.0.0`

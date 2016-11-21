@@ -119,7 +119,7 @@ RUN fastlane --version
 RUN echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" |  sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
  && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
  && sudo apt-get update -qq \
- && sudo apt-get install -y -qq --no-install-recommends google-cloud-sdk
+ && sudo apt-get install -y -qq google-cloud-sdk
 
 RUN /usr/bin/gcloud config set --installation component_manager/disable_update_check true
 RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.json

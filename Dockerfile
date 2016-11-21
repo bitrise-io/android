@@ -117,9 +117,7 @@ RUN fastlane --version
 # --- https://firebase.google.com/docs/test-lab/command-line
 # --- https://cloud.google.com/sdk/downloads?hl=sr#linux
 
-ENV CLOUD_SDK_REPO cloud-sdk-xenial
-
-RUN echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" |  sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+RUN echo "deb https://packages.cloud.google.com/apt cloud-sdk-`lsb_release -c -s` main" |  sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
  && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
  && sudo apt-get update -qq \
  && sudo apt-get install -y -qq google-cloud-sdk

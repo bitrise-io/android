@@ -116,18 +116,13 @@ RUN fastlane --version
 # --- https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
 # --- https://firebase.google.com/docs/test-lab/command-line
 
-# Install the Google Cloud SDK.
-ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
-RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.zip && unzip google-cloud-sdk.zip && rm google-cloud-sdk.zip
+RUN echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" |  sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+ && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
+ && sudo apt-get update -qq \
+ && sudo apt-get install -y -qq --no-install-recommends google-cloud-sdk
 
-# Install beta for Firebase Test Lab
-RUN google-cloud-sdk/install.sh --usage-reporting=true --path-update=true --bash-completion=true --rc-path=/.bashrc --additional-components beta
-
-RUN google-cloud-sdk/bin/gcloud config set --installation component_manager/disable_update_check true
-RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' /google-cloud-sdk/lib/googlecloudsdk/core/config.json
-
-RUN mkdir /.ssh
-ENV PATH /google-cloud-sdk/bin:$PATH
+RUN /usr/bin/gcloud config set --installation component_manager/disable_update_check true
+RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.json
 
 # ------------------------------------------------------
 # --- Cleanup and rev num

@@ -117,7 +117,6 @@ RUN fastlane --version
 # --- https://firebase.google.com/docs/test-lab/command-line
 
 # Install the Google Cloud SDK.
-ENV HOME /
 ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
 RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.zip && unzip google-cloud-sdk.zip && rm google-cloud-sdk.zip
 

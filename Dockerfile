@@ -117,15 +117,20 @@ RUN fastlane --version
 # --- https://firebase.google.com/docs/test-lab/command-line
 # --- https://cloud.google.com/sdk/downloads?hl=sr#linux
 
-ENV CLOUD_SDK_REPO="cloud-sdk-xenial"
+ENV CLOUD_SDK_REPO cloud-sdk-xenial
 
 RUN echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" |  sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
  && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
  && sudo apt-get update -qq \
  && sudo apt-get install -y -qq google-cloud-sdk
 
+ENV CLOUD_SDK_CONFIG /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.json
+
 RUN /usr/bin/gcloud config set --installation component_manager/disable_update_check true
-RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.json
+RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' $CLOUD_SDK_CONFIG
+
+RUN /usr/bin/gcloud config set --installation core/disable_usage_reporting true
+RUN sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\": true/g' $CLOUD_SDK_CONFIG
 
 # ------------------------------------------------------
 # --- Cleanup and rev num

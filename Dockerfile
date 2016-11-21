@@ -124,6 +124,7 @@ RUN echo "deb https://packages.cloud.google.com/apt cloud-sdk-`lsb_release -c -s
 
 ENV CLOUD_SDK_CONFIG /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.json
 
+# gcloud config doesn't update config.json. See upstream Dockerfile for details.
 RUN /usr/bin/gcloud config set --installation component_manager/disable_update_check true
 RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' $CLOUD_SDK_CONFIG
 

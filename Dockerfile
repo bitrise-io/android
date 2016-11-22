@@ -112,6 +112,26 @@ RUN gem install fastlane --no-document
 RUN fastlane --version
 
 # ------------------------------------------------------
+# --- Install Google Cloud SDK
+# --- https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
+# --- https://firebase.google.com/docs/test-lab/command-line
+# --- https://cloud.google.com/sdk/downloads?hl=sr#linux
+
+RUN echo "deb https://packages.cloud.google.com/apt cloud-sdk-`lsb_release -c -s` main" |  sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+ && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
+ && sudo apt-get update -qq \
+ && sudo apt-get install -y -qq google-cloud-sdk
+
+ENV CLOUD_SDK_CONFIG /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.json
+
+# gcloud config doesn't update config.json. See upstream Dockerfile for details.
+RUN /usr/bin/gcloud config set --installation component_manager/disable_update_check true
+RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' $CLOUD_SDK_CONFIG
+
+RUN /usr/bin/gcloud config set --installation core/disable_usage_reporting true
+RUN sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\": true/g' $CLOUD_SDK_CONFIG
+
+# ------------------------------------------------------
 # --- Cleanup and rev num
 
 # Cleaning

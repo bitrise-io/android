@@ -28,6 +28,12 @@ echo "========================================"
 echo
 
 echo
+echo "=== Google Cloud components ============"
+gcloud version
+echo "========================================"
+echo
+
+echo
 echo "=== Testing Android tools =============="
 echo " * adb path:"
 which adb

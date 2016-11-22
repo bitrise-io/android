@@ -28,8 +28,14 @@ echo "========================================"
 echo
 
 echo
-echo "=== Google Cloud SDK components ============"
+echo "=== Google Cloud SDK components ========"
 gcloud version
+echo "========================================"
+echo
+
+echo
+echo "=== Google Cloud Network Check ========="
+gcloud info --run-diagnostics
 echo "========================================"
 echo
 

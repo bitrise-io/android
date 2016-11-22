@@ -28,7 +28,7 @@ echo "========================================"
 echo
 
 echo
-echo "=== Google Cloud components ============"
+echo "=== Google Cloud SDK components ============"
 gcloud version
 echo "========================================"
 echo

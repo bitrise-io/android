@@ -1,3 +1,8 @@
+## `v2016_11_22_1`
+
+* Google Cloud SDK is now preinstalled - thanks [@bootstraponline](https://github.com/bootstraponline) for the [PR](https://github.com/bitrise-docker/android/pull/36)!
+
+
 ## `v2016_11_17_1`
 
 * removed `sys-img-armeabi-v7a-android-23` - it seems this Android package was removed from the registry

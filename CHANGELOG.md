@@ -1,3 +1,8 @@
+## `v2016_11_23_1`
+
+* new preinstalled package: `build-tools-25.0.1`
+
+
 ## `v2016_11_22_1`
 
 * Google Cloud SDK is now preinstalled - thanks [@bootstraponline](https://github.com/bootstraponline) for the [PR](https://github.com/bitrise-docker/android/pull/36)!

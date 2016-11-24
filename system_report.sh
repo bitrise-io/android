@@ -29,13 +29,21 @@ echo
 
 echo
 echo "=== Google Cloud SDK components ========"
-gcloud version
+if [[ "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" == "v2016_11_09_1" ]] ; then
+    echo " (!) Not pre-installed on this Stack / in this image"
+else
+    gcloud version
+fi
 echo "========================================"
 echo
 
 echo
 echo "=== Google Cloud Network Check ========="
-gcloud info --run-diagnostics
+if [[ "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" == "v2016_11_09_1" ]] ; then
+    echo " (!) Not pre-installed on this Stack / in this image"
+else
+    gcloud info --run-diagnostics
+fi
 echo "========================================"
 echo
 

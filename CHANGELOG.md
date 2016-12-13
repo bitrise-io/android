@@ -1,3 +1,8 @@
+## `v2016_12_13_1`
+
+* package `extra-android-support` removed - it's no longer available
+
+
 ## `v2016_11_23_1`
 
 * new preinstalled package: `build-tools-25.0.1`

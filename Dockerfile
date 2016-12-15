@@ -145,5 +145,5 @@ RUN sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\":
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2016_12_13_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2016_12_15_1
 CMD bitrise -version

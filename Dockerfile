@@ -36,7 +36,6 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 # (!!!) Only install one package at a time, as "echo y" will only work for one license!
 #       If you don't do it this way you might get "Unknown response" in the logs,
 #         but the android SDK tool **won't** fail, it'll just **NOT** install the package.
-RUN echo y | android update sdk --no-ui --all --filter tools | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter platform-tools | grep 'package installed'
 
 # SDKs
@@ -88,6 +87,9 @@ RUN echo y | android update sdk --no-ui --all --filter extra-google-google_play_
 RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-23 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-22 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-21 | grep 'package installed'
+
+# Update the tools package
+RUN echo y | android update sdk --no-ui --all --filter tools | grep 'package installed'
 
 
 # ------------------------------------------------------

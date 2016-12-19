@@ -91,9 +91,6 @@ RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-
 RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-22 | grep 'package installed'
 RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-21 | grep 'package installed'
 
-# Update the tools package
-RUN echo y | android update sdk --no-ui --all --filter tools | grep 'package installed'
-
 
 # ------------------------------------------------------
 # --- Install Gradle from PPA
@@ -140,6 +137,14 @@ RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' $GCLOUD
 
 RUN /usr/bin/gcloud config set --installation core/disable_usage_reporting true
 RUN sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\": true/g' $GCLOUD_SDK_CONFIG
+
+
+# ------------------------------------------------------
+# --- Install additional packages
+
+# Required for Android ARM Emulator
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
+
 
 # ------------------------------------------------------
 # --- Cleanup and rev num

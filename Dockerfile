@@ -152,5 +152,5 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2016_12_15_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2016_12_19_1
 CMD bitrise -version

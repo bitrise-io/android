@@ -1,3 +1,9 @@
+## `v2016_12_19_1`
+
+* Upgraded Android tools to `r25.2.4`
+* Pre-installed `libqt5widgets5` for Android Emulator
+
+
 ## `v2016_12_15_1`
 
 * new preinstalled package: `build-tools-25.0.2`

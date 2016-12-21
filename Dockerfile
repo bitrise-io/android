@@ -144,6 +144,8 @@ RUN sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\":
 
 # Required for Android ARM Emulator
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
+ENV QT_QPA_PLATFORM offscreen
+ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 
 
 # ------------------------------------------------------

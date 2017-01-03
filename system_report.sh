@@ -21,8 +21,10 @@ echo "=== Pre-installed tool versions ========"
 
 ver_line="$(gradle --version | grep 'Gradle ')" ;     echo "* Gradle: $ver_line"
 ver_line="$(mvn --version | grep 'Apache Maven')" ;   echo "* Maven: $ver_line"
-ver_line="$(fastlane --version | grep 'fastlane ')" ;   echo "* Fastlane: $ver_line"
+ver_line="$(fastlane --version | grep 'fastlane ')" ; echo "* Fastlane: $ver_line"
 ver_line="$( javac -version 2>&1 )" ;                 echo "* Java: $ver_line"
+ver_line="$(cordova --version)" ;                     echo "* Cordova CLI version: $ver_line"
+ver_line="$(ionic --version)" ;                       echo "* Ionic CLI version: $ver_line"
 
 echo "========================================"
 echo

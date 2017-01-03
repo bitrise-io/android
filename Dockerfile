@@ -108,6 +108,13 @@ RUN apt-get update
 RUN apt-get -y install maven
 RUN mvn --version
 
+
+# ------------------------------------------------------
+# --- Pre-install Ionic and Cordova CLIs
+
+RUN npm install -g ionic cordova
+
+
 # ------------------------------------------------------
 # --- Install Fastlane
 

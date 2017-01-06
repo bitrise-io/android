@@ -1,3 +1,9 @@
+## `v2017_01_05_1`
+
+* preinstall `ionic` and `cordova` npm packages (CLIs)
+* `QT_QPA_PLATFORM` & `LD_LIBRARY_PATH` env vars set by default, for Android Emulator
+
+
 ## `v2016_12_19_1`
 
 * Upgraded Android tools to `r25.2.4`

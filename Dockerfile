@@ -101,6 +101,13 @@ RUN apt-get update
 RUN apt-get -y install maven
 RUN mvn --version
 
+
+# ------------------------------------------------------
+# --- Pre-install Ionic and Cordova CLIs
+
+RUN npm install -g ionic cordova
+
+
 # ------------------------------------------------------
 # --- Install Fastlane
 
@@ -147,5 +154,5 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2016_12_19_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_01_05_1
 CMD bitrise -version

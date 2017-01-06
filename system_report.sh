@@ -21,7 +21,7 @@ echo "=== Pre-installed tool versions ========"
 
 ver_line="$(gradle --version | grep 'Gradle ')" ;     echo "* Gradle: $ver_line"
 ver_line="$(mvn --version | grep 'Apache Maven')" ;   echo "* Maven: $ver_line"
-ver_line="$(fastlane --version | grep 'fastlane ')" ; echo "* Fastlane: $ver_line"
+ver_line="$(fastlane --version | grep 'fastlane ' | tail -1)" ; echo "* Fastlane: $ver_line"
 ver_line="$( javac -version 2>&1 )" ;                 echo "* Java: $ver_line"
 
 if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then

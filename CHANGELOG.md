@@ -1,3 +1,8 @@
+## `v2017_01_11_1`
+
+* Pre-installed android packages cleanup: https://github.com/bitrise-docker/android/pull/55/files
+
+
 ## `v2017_01_05_1`
 
 * preinstall `ionic` and `cordova` npm packages (CLIs)

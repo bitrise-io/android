@@ -169,7 +169,7 @@ workflows:
             fi
 
             echo " => Tagging: ${DOCKER_IMAGE_DEPLOY_TAG} ..."
-            docker tag -f "${DOCKERHUB_IMG_ID}:latest" "${DOCKERHUB_IMG_ID}:${DOCKER_IMAGE_DEPLOY_TAG}"
+            docker tag "${DOCKERHUB_IMG_ID}:latest" "${DOCKERHUB_IMG_ID}:${DOCKER_IMAGE_DEPLOY_TAG}"
             if [ $? -ne 0 ] ; then
               echo " [!] ERROR: failed to tag the image"
               exit 1

@@ -3,6 +3,6 @@
 # is pre-cached on the [bitrise.io](https://www.bitrise.io/) Linux/Android Virtual Machines.
 # Read more about how versions are handled in the `README.md`.
 
-FROM bitriseio/docker-android-alpha:v2017_02_17-06_52-b454
+FROM bitriseio/docker-android-alpha:v2017_02_24-02_21-b462
 
 CMD bitrise --version

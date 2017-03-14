@@ -1,3 +1,10 @@
+## `v2017_03_14_1`
+
+* SDK tools updated to 25.2.5
+* And related, quite significant Dockerfile revision: https://github.com/bitrise-docker/android/pull/68
+    * Thanks @koral-- for the PR!
+
+
 ## `v2017_01_11_1`
 
 * Pre-installed android packages cleanup: https://github.com/bitrise-docker/android/pull/55/files

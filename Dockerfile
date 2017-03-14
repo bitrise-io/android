@@ -20,13 +20,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 l
 # ------------------------------------------------------
 # --- Download Android SDK tools into $ANDROID_HOME
 
-RUN cd /opt && wget -q https://dl.google.com/android/repository/tools_r25.2.4-linux.zip -O android-sdk-tools.zip
+RUN cd /opt && wget -q https://dl.google.com/android/repository/tools_r25.2.5-linux.zip -O android-sdk-tools.zip
 RUN cd /opt && unzip -q android-sdk-tools.zip
 RUN mkdir -p ${ANDROID_HOME}
 RUN cd /opt && mv tools/ ${ANDROID_HOME}/tools/
 RUN cd /opt && rm -f android-sdk-tools.zip
 
-ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages
@@ -34,56 +34,66 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 # Other tools and resources of Android SDK
 #  you should only install the packages you need!
 # To get a full list of available options you can use:
-#  android list sdk --no-ui --all --extended
-# (!!!) Only install one package at a time, as "echo y" will only work for one license!
-#       If you don't do it this way you might get "Unknown response" in the logs,
-#         but the android SDK tool **won't** fail, it'll just **NOT** install the package.
-RUN echo y | android update sdk --no-ui --all --filter platform-tools | grep 'package installed'
+#  sdkmanager --list
+
+# Accept "android-sdk-license" before installing components, no need to echo y for each component
+# License is valid for all the standard components in versions installed from this file
+# Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
+RUN mkdir -p ${ANDROID_HOME}/licenses
+RUN echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/android-sdk-license
+
+# Platform tools
+RUN sdkmanager "platform-tools"
 
 # SDKs
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter android-25 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-24 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-23 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-22 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-21 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-20 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-19 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-17 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-15 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter android-10 | grep 'package installed'
+RUN sdkmanager "platforms;android-25"
+RUN sdkmanager "platforms;android-24"
+RUN sdkmanager "platforms;android-23"
+RUN sdkmanager "platforms;android-22"
+RUN sdkmanager "platforms;android-21"
+RUN sdkmanager "platforms;android-20"
+RUN sdkmanager "platforms;android-19"
+RUN sdkmanager "platforms;android-17"
+RUN sdkmanager "platforms;android-15"
+RUN sdkmanager "platforms;android-10"
 
 # build tools
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter build-tools-25.0.2 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter build-tools-24.0.3 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter build-tools-23.0.3 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter build-tools-22.0.1 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter build-tools-21.1.2 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter build-tools-20.0.0 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter build-tools-19.1.0 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter build-tools-17.0.0 | grep 'package installed'
+RUN sdkmanager "build-tools;25.0.2"
+RUN sdkmanager "build-tools;24.0.3"
+RUN sdkmanager "build-tools;23.0.3"
+RUN sdkmanager "build-tools;22.0.1"
+RUN sdkmanager "build-tools;21.1.2"
+RUN sdkmanager "build-tools;20.0.0"
+RUN sdkmanager "build-tools;19.1.0"
+RUN sdkmanager "build-tools;17.0.0"
 
 # Android System Images, for emulators
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-24 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-22 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-21 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-19 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-17 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-15 | grep 'package installed'
+RUN sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
+RUN sdkmanager "system-images;android-24;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-22;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-21;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-19;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-17;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-15;default;armeabi-v7a"
 
 # Extras
-RUN echo y | android update sdk --no-ui --all --filter extra-android-m2repository | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter extra-google-m2repository | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter extra-google-google_play_services | grep 'package installed'
+RUN sdkmanager "extras;android;m2repository"
+RUN sdkmanager "extras;google;m2repository"
+RUN sdkmanager "extras;google;google_play_services"
+
+# Constraint Layout
+# Please keep these in descending order!
+RUN sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
+RUN sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1"
 
 # google apis
 # Please keep these in descending order!
-RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-23 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-22 | grep 'package installed'
-RUN echo y | android update sdk --no-ui --all --filter addon-google_apis-google-21 | grep 'package installed'
-
+RUN sdkmanager "add-ons;addon-google_apis-google-23"
+RUN sdkmanager "add-ons;addon-google_apis-google-22"
+RUN sdkmanager "add-ons;addon-google_apis-google-21"
 
 # ------------------------------------------------------
 # --- Install Gradle from PPA

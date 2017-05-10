@@ -1,8 +1,12 @@
+## `v2017_05_10_1`
+
+* new preinstalled package: `build-tools-25.0.3`: https://github.com/bitrise-docker/android/pull/83
+
 ## `v2017_03_14_1`
 
 * SDK tools updated to 25.2.5
 * And related, quite significant Dockerfile revision: https://github.com/bitrise-docker/android/pull/68
-    * Thanks @koral-- for the PR!
+    * Thanks [@koral--](https://github.com/koral--) for the PR!
 
 
 ## `v2017_01_11_1`

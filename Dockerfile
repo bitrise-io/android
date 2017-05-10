@@ -59,6 +59,7 @@ RUN sdkmanager "platforms;android-10"
 
 # build tools
 # Please keep these in descending order!
+RUN sdkmanager "build-tools;25.0.3"
 RUN sdkmanager "build-tools;25.0.2"
 RUN sdkmanager "build-tools;24.0.3"
 RUN sdkmanager "build-tools;23.0.3"

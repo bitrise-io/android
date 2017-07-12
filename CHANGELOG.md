@@ -1,3 +1,7 @@
+## `v2017_07_13_1`
+
+* SDK tools, Platform Tools and Emulator versions added to `system_report.sh` : https://github.com/bitrise-docker/android/pull/96
+
 ## `v2017_07_12_1`
 
 * SDK tools updated to 26.0.2 : https://github.com/bitrise-docker/android/pull/95

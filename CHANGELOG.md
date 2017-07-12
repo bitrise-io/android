@@ -1,3 +1,7 @@
+## `v2017_07_12_1`
+
+* SDK tools updated to 26.0.2 : https://github.com/bitrise-docker/android/pull/95
+
 ## `v2017_06_10_1`
 
 * new preinstalled packages: `build-tools-26.0.0`, `platforms;android-26` : https://github.com/bitrise-docker/android/pull/88

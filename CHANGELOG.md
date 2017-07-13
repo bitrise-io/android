@@ -1,6 +1,7 @@
 ## `v2017_07_13_1`
 
 * SDK tools, Platform Tools and Emulator versions added to `system_report.sh` : https://github.com/bitrise-docker/android/pull/96
+* new preinstalled package: `emulator`
 
 ## `v2017_07_12_1`
 

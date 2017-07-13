@@ -44,6 +44,9 @@ RUN echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/and
 # Platform tools
 RUN sdkmanager "platform-tools"
 
+# Emulator
+RUN sdkmanager "emulator"
+
 # SDKs
 # Please keep these in descending order!
 RUN sdkmanager "platforms;android-26"

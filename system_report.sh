@@ -66,9 +66,9 @@ echo " * SDK packages:"
 if [[ ! -z "${BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS}" ]] ; then
     echo " (!) Version check not available on this Stack / in this image"
 else
-    ver_line="$(grep ^Pkg.Revision ${ANDROID_HOME}/tools/source.properties | cut -d= -f 2)" ; echo "* SDK Tools version: $ver_line"
-    ver_line="$(grep ^Pkg.Revision ${ANDROID_HOME}/platform-tools/source.properties | cut -d= -f 2)" ; echo "* Platform Tools version: $ver_line"
-    ver_line="$(grep ^Pkg.Revision ${ANDROID_HOME}/emulator/source.properties | cut -d= -f 2)" ; echo "* Emulator version: $ver_line"
+    grep ^Pkg.Revision ${ANDROID_HOME}/tools/source.properties | cut -d= -f 2 | xargs -I {} echo "* SDK Tools version: {}"
+    grep ^Pkg.Revision ${ANDROID_HOME}/platform-tools/source.properties | cut -d= -f 2 | xargs -I {} echo "* Platform Tools version: {}"
+    grep ^Pkg.Revision ${ANDROID_HOME}/emulator/source.properties | cut -d= -f 2 | xargs -I {} echo "* Emulator version: {}"
 fi
 
 echo "========================================"

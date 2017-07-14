@@ -87,7 +87,11 @@ echo "* ./build-tools:"
 ls -1 ${ANDROID_HOME}/build-tools
 echo
 echo "* ./emulator:"
-ls -1 ${ANDROID_HOME}/emulator
+if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
+    echo " (!) ./emulator dir does not exist on LTS"
+else
+    ls -1 ${ANDROID_HOME}/emulator
+fi
 echo
 echo "* ./extras:"
 tree -L 2 ${ANDROID_HOME}/extras

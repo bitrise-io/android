@@ -80,19 +80,22 @@ echo
 echo "* ANDROID_HOME:"
 ls -a1 ${ANDROID_HOME}
 echo
-echo "* platform-tools:"
+echo "* ./platform-tools:"
 ls -1 ${ANDROID_HOME}/platform-tools
 echo
-echo "* build-tools:"
+echo "* ./build-tools:"
 ls -1 ${ANDROID_HOME}/build-tools
 echo
-echo "* extras:"
+echo "* ./emulator:"
+ls -1 ${ANDROID_HOME}/emulator
+echo
+echo "* ./extras:"
 tree -L 2 ${ANDROID_HOME}/extras
 echo
-echo "* platforms:"
+echo "* ./platforms:"
 ls -1 ${ANDROID_HOME}/platforms
 echo
-echo "* system-images:"
+echo "* ./system-images:"
 tree -L 3 ${ANDROID_HOME}/system-images
 echo "========================================"
 echo

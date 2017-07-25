@@ -1,3 +1,7 @@
+## `v2017_07_26_1`
+
+* new preinstalled package: `build-tools-26.0.1`: https://github.com/bitrise-docker/android/pull/100
+
 ## `v2017_07_13_1`
 
 * SDK tools, Platform Tools and Emulator versions added to `system_report.sh` : https://github.com/bitrise-docker/android/pull/96

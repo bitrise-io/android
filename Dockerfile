@@ -49,73 +49,71 @@ RUN sdkmanager "emulator"
 
 # SDKs
 # Please keep these in descending order!
-RUN sdkmanager "platforms;android-26"
-RUN sdkmanager "platforms;android-25"
-RUN sdkmanager "platforms;android-24"
-RUN sdkmanager "platforms;android-23"
-RUN sdkmanager "platforms;android-22"
-RUN sdkmanager "platforms;android-21"
-RUN sdkmanager "platforms;android-20"
-RUN sdkmanager "platforms;android-19"
-RUN sdkmanager "platforms;android-17"
-RUN sdkmanager "platforms;android-15"
-RUN sdkmanager "platforms;android-10"
-
+RUN sdkmanager \
+    "platforms;android-26" \
+    "platforms;android-25" \
+    "platforms;android-24" \
+    "platforms;android-23" \
+    "platforms;android-22" \
+    "platforms;android-21" \
+    "platforms;android-20" \
+    "platforms;android-19" \
+    "platforms;android-17" \
+    "platforms;android-15" \
+    "platforms;android-10" \
 # build tools
 # Please keep these in descending order!
-RUN sdkmanager "build-tools;26.0.1"
-RUN sdkmanager "build-tools;26.0.0"
-RUN sdkmanager "build-tools;25.0.3"
-RUN sdkmanager "build-tools;25.0.2"
-RUN sdkmanager "build-tools;24.0.3"
-RUN sdkmanager "build-tools;23.0.3"
-RUN sdkmanager "build-tools;22.0.1"
-RUN sdkmanager "build-tools;21.1.2"
-RUN sdkmanager "build-tools;20.0.0"
-RUN sdkmanager "build-tools;19.1.0"
-RUN sdkmanager "build-tools;17.0.0"
-
+    "build-tools;26.0.1" \
+    "build-tools;26.0.0" \
+    "build-tools;25.0.3" \
+    "build-tools;25.0.2" \
+    "build-tools;24.0.3" \
+    "build-tools;23.0.3" \
+    "build-tools;22.0.1" \
+    "build-tools;21.1.2" \
+    "build-tools;20.0.0" \
+    "build-tools;19.1.0" \
+    "build-tools;17.0.0" \
 # Android System Images, for emulators
 # Please keep these in descending order!
-RUN sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
-RUN sdkmanager "system-images;android-24;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-22;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-21;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-19;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-17;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-15;default;armeabi-v7a"
-
+    "system-images;android-25;google_apis;armeabi-v7a" \
+    "system-images;android-24;default;armeabi-v7a" \
+    "system-images;android-22;default;armeabi-v7a" \
+    "system-images;android-21;default;armeabi-v7a" \
+    "system-images;android-19;default;armeabi-v7a" \
+    "system-images;android-17;default;armeabi-v7a" \
+    "system-images;android-15;default;armeabi-v7a" \
 # Extras
-RUN sdkmanager "extras;android;m2repository"
-RUN sdkmanager "extras;google;m2repository"
-RUN sdkmanager "extras;google;google_play_services"
+    "extras;android;m2repository" \
+    "extras;google;m2repository" \
+    "extras;google;google_play_services" \
 
 # Constraint Layout
 # Please keep these in descending order!
-RUN sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
-RUN sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1"
+    "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
+    "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" \
 
 # google apis
 # Please keep these in descending order!
-RUN sdkmanager "add-ons;addon-google_apis-google-23"
-RUN sdkmanager "add-ons;addon-google_apis-google-22"
-RUN sdkmanager "add-ons;addon-google_apis-google-21"
+    "add-ons;addon-google_apis-google-23" \
+    "add-ons;addon-google_apis-google-22" \
+    "add-ons;addon-google_apis-google-21"
 
 # ------------------------------------------------------
 # --- Install Gradle from PPA
 
 # Gradle PPA
-RUN apt-get update
-RUN apt-get -y install gradle
-RUN gradle -v
+RUN apt-get update \
+ && apt-get -y install gradle \
+ && gradle -v
 
 # ------------------------------------------------------
 # --- Install Maven 3 from PPA
 
-RUN apt-get purge maven maven2
-RUN apt-get update
-RUN apt-get -y install maven
-RUN mvn --version
+RUN apt-get purge maven maven2 \
+ && apt-get update \
+ && apt-get -y install maven \
+ && mvn --version
 
 
 # ------------------------------------------------------
@@ -127,8 +125,8 @@ RUN npm install -g ionic cordova
 # ------------------------------------------------------
 # --- Install Fastlane
 
-RUN gem install fastlane --no-document
-RUN fastlane --version
+RUN gem install fastlane --no-document \
+ && fastlane --version
 
 # ------------------------------------------------------
 # --- Install Google Cloud SDK
@@ -141,8 +139,8 @@ RUN fastlane --version
 
 RUN echo "deb https://packages.cloud.google.com/apt cloud-sdk-`lsb_release -c -s` main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-RUN sudo apt-get update -qq
-RUN sudo apt-get install -y -qq google-cloud-sdk
+RUN sudo apt-get update -qq \
+ && sudo apt-get install -y -qq google-cloud-sdk
 
 ENV GCLOUD_SDK_CONFIG /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.json
 

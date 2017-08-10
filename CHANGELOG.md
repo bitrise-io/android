@@ -1,3 +1,9 @@
+## `v2017_08_10_1`
+
+* Android Emulator package version locked (`26.1.2` / `4077558`) : https://github.com/bitrise-docker/android/pull/104
+* Docker image layer optimizations : https://github.com/bitrise-docker/android/pull/105
+
+
 ## `v2017_07_26_1`
 
 * new preinstalled package: `build-tools-26.0.1`: https://github.com/bitrise-docker/android/pull/100

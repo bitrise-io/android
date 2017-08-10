@@ -55,11 +55,7 @@ RUN sdkmanager "platforms;android-24"
 RUN sdkmanager "platforms;android-23"
 RUN sdkmanager "platforms;android-22"
 RUN sdkmanager "platforms;android-21"
-RUN sdkmanager "platforms;android-20"
 RUN sdkmanager "platforms;android-19"
-RUN sdkmanager "platforms;android-17"
-RUN sdkmanager "platforms;android-15"
-RUN sdkmanager "platforms;android-10"
 
 # build tools
 # Please keep these in descending order!
@@ -71,9 +67,7 @@ RUN sdkmanager "build-tools;24.0.3"
 RUN sdkmanager "build-tools;23.0.3"
 RUN sdkmanager "build-tools;22.0.1"
 RUN sdkmanager "build-tools;21.1.2"
-RUN sdkmanager "build-tools;20.0.0"
 RUN sdkmanager "build-tools;19.1.0"
-RUN sdkmanager "build-tools;17.0.0"
 
 # Android System Images, for emulators
 # Please keep these in descending order!
@@ -82,8 +76,6 @@ RUN sdkmanager "system-images;android-24;default;armeabi-v7a"
 RUN sdkmanager "system-images;android-22;default;armeabi-v7a"
 RUN sdkmanager "system-images;android-21;default;armeabi-v7a"
 RUN sdkmanager "system-images;android-19;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-17;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-15;default;armeabi-v7a"
 
 # Extras
 RUN sdkmanager "extras;android;m2repository"

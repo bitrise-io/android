@@ -45,7 +45,12 @@ RUN echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/and
 RUN sdkmanager "platform-tools"
 
 # Emulator
-RUN sdkmanager "emulator"
+# RUN sdkmanager "emulator"
+# For now we'll keep using 26.1.2 ; 26.1.3 had some booting issues...
+RUN cd /opt \
+ && wget https://dl.google.com/android/repository/emulator-linux-4077558.zip -O emulator.zip \
+ && unzip -q emulator.zip -d ${ANDROID_HOME} \
+ && rm -f emulator.zip
 
 # SDKs
 # Please keep these in descending order!

@@ -151,11 +151,10 @@ ENV GCLOUD_SDK_CONFIG /usr/lib/google-cloud-sdk/lib/googlecloudsdk/core/config.j
 
 # gcloud config doesn't update config.json. See the official Dockerfile for details:
 #  https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
-RUN /usr/bin/gcloud config set --installation component_manager/disable_update_check true
-RUN sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' $GCLOUD_SDK_CONFIG
-
-RUN /usr/bin/gcloud config set --installation core/disable_usage_reporting true
-RUN sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\": true/g' $GCLOUD_SDK_CONFIG
+RUN /usr/bin/gcloud config set --installation component_manager/disable_update_check true \
+ && sed -i -- 's/\"disable_updater\": false/\"disable_updater\": true/g' $GCLOUD_SDK_CONFIG \
+ && /usr/bin/gcloud config set --installation core/disable_usage_reporting true \
+ && sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\": true/g' $GCLOUD_SDK_CONFIG
 
 
 # ------------------------------------------------------

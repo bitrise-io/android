@@ -1,3 +1,11 @@
+## `v2017_08_14_1`
+
+* Minor pre-installed package cleanup / removal:
+    * Build tools: `26.0.0` & `25.0.2` & `20.0.0`
+    * `platforms;android-20`
+    * `system-images` : `android-17` & `android-15`
+
+
 ## `v2017_08_10_1`
 
 * Android Emulator package version locked (`26.1.2` / `4077558`) : https://github.com/bitrise-docker/android/pull/104

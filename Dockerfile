@@ -69,9 +69,7 @@ RUN sdkmanager \
 # build tools
 # Please keep these in descending order!
     "build-tools;26.0.1" \
-    "build-tools;26.0.0" \
     "build-tools;25.0.3" \
-    "build-tools;25.0.2" \
     "build-tools;24.0.3" \
     "build-tools;23.0.3" \
     "build-tools;22.0.1" \

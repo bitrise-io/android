@@ -23,7 +23,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 l
 RUN cd /opt \
     && wget -q https://dl.google.com/android/repository/sdk-tools-linux-3952940.zip -O android-sdk-tools.zip \
     && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
-    && rm -f android-sdk-tools.zip
+    && rm android-sdk-tools.zip
 
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
@@ -50,7 +50,7 @@ RUN sdkmanager "platform-tools"
 RUN cd /opt \
  && wget https://dl.google.com/android/repository/emulator-linux-4077558.zip -O emulator.zip \
  && unzip -q emulator.zip -d ${ANDROID_HOME} \
- && rm -f emulator.zip
+ && rm emulator.zip
 
 # SDKs
 # Please keep these in descending order!
@@ -61,7 +61,6 @@ RUN sdkmanager \
     "platforms;android-23" \
     "platforms;android-22" \
     "platforms;android-21" \
-    "platforms;android-20" \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
@@ -76,7 +75,6 @@ RUN sdkmanager \
     "build-tools;23.0.3" \
     "build-tools;22.0.1" \
     "build-tools;21.1.2" \
-    "build-tools;20.0.0" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
 # Android System Images, for emulators
@@ -86,8 +84,6 @@ RUN sdkmanager \
     "system-images;android-22;default;armeabi-v7a" \
     "system-images;android-21;default;armeabi-v7a" \
     "system-images;android-19;default;armeabi-v7a" \
-    "system-images;android-17;default;armeabi-v7a" \
-    "system-images;android-15;default;armeabi-v7a" \
 # Extras
     "extras;android;m2repository" \
     "extras;google;m2repository" \

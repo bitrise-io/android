@@ -1,3 +1,7 @@
+## `v2017_09_20_1`
+
+* SDK tools updated to 26.1.1 : https://github.com/bitrise-docker/android/pull/118
+
 ## `v2017_08_14_1`
 
 * Minor pre-installed package cleanup / removal:

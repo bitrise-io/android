@@ -53,7 +53,7 @@ RUN cd /opt \
 
 # SDKs
 # Please keep these in descending order!
-RUN sdkmanager \
+RUN yes | sdkmanager \
     "platforms;android-26" \
     "platforms;android-25" \
     "platforms;android-24" \

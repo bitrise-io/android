@@ -110,27 +110,26 @@ workflows:
             set -ex
             envman add --key 'DOCKER_IMAGE_DEPLOY_TAG' --value "v$(date +%Y_%m_%d-%H_%M)-b${BITRISE_BUILD_NUMBER}"
 
-  _slack_start:
-    steps:
-    - slack@2.1.0:
-        run_if: .IsCI
-        inputs:
-        - webhook_url: $SLACK_WEBHOOK_URL
-        - channel: $SLACK_CHANNEL
-        - from_username: "$BITRISE_APP_TITLE - OK"
-        - from_username_on_error: "$BITRISE_APP_TITLE - ERROR"
-        - message: |
-            Started:
+  # _slack_start:
+  #   steps:
+  #   - slack@2.1.0:
+  #       run_if: .IsCI
+  #       inputs:
+  #       - webhook_url: $SLACK_WEBHOOK_URL
+  #       - channel: $SLACK_CHANNEL
+  #       - from_username: "$BITRISE_APP_TITLE - OK"
+  #       - from_username_on_error: "$BITRISE_APP_TITLE - ERROR"
+  #       - message: |
+  #           Started:
 
-            - Build URL: $BITRISE_BUILD_URL
-            - Build Number: $BITRISE_BUILD_NUMBER
-            - Image ID: $DOCKERHUB_IMG_ID
-            - Image tag: $DOCKER_IMAGE_DEPLOY_TAG
+  #           - Build URL: $BITRISE_BUILD_URL
+  #           - Build Number: $BITRISE_BUILD_NUMBER
+  #           - Image ID: $DOCKERHUB_IMG_ID
+  #           - Image tag: $DOCKER_IMAGE_DEPLOY_TAG
 
   _deploy:
     before_run:
     - _generate_image_deploy_tag
-    - _slack_start
     - _rebuild
     steps:
     - script@1.1.0:

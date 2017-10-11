@@ -53,6 +53,7 @@ RUN cd /opt \
 
 # SDKs
 # Please keep these in descending order!
+# The `yes` is for accepting all non-standard tool licenses.
 RUN yes | sdkmanager \
     "platforms;android-26" \
     "platforms;android-25" \

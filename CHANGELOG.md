@@ -1,3 +1,9 @@
+## UPCOMING
+
+## `v2017_10_11_1`
+
+* fix android/sdkmanager license issues
+
 ## `v2017_10_06_1`
 
 * new preinstalled package: `build-tools-26.0.2`: https://github.com/bitrise-docker/android/pull/122

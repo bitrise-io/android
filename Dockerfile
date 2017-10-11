@@ -35,11 +35,10 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 # To get a full list of available options you can use:
 #  sdkmanager --list
 
-# Accept "android-sdk-license" before installing components, no need to echo y for each component
+# Accept licenses before installing components, no need to echo y for each component
 # License is valid for all the standard components in versions installed from this file
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
-RUN mkdir -p ${ANDROID_HOME}/licenses
-RUN echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/android-sdk-license
+RUN yes | sdkmanager --licenses
 
 # Platform tools
 RUN sdkmanager "platform-tools"
@@ -54,7 +53,8 @@ RUN cd /opt \
 
 # SDKs
 # Please keep these in descending order!
-RUN sdkmanager \
+# The `yes` is for accepting all non-standard tool licenses.
+RUN yes | sdkmanager \
     "platforms;android-26" \
     "platforms;android-25" \
     "platforms;android-24" \
@@ -167,5 +167,5 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_10_06_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_10_11_1
 CMD bitrise -version

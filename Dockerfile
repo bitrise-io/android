@@ -54,6 +54,8 @@ RUN cd /opt \
 # SDKs
 # Please keep these in descending order!
 # The `yes` is for accepting all non-standard tool licenses.
+
+# Please keep all sections in descending order!
 RUN yes | sdkmanager \
     "platforms;android-26" \
     "platforms;android-25" \
@@ -65,8 +67,6 @@ RUN yes | sdkmanager \
     "platforms;android-17" \
     "platforms;android-15" \
     "platforms;android-10" \
-# build tools
-# Please keep these in descending order!
     "build-tools;26.0.2" \
     "build-tools;26.0.1" \
     "build-tools;25.0.3" \
@@ -76,25 +76,16 @@ RUN yes | sdkmanager \
     "build-tools;21.1.2" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
-# Android System Images, for emulators
-# Please keep these in descending order!
     "system-images;android-25;google_apis;armeabi-v7a" \
     "system-images;android-24;default;armeabi-v7a" \
     "system-images;android-22;default;armeabi-v7a" \
     "system-images;android-21;default;armeabi-v7a" \
     "system-images;android-19;default;armeabi-v7a" \
-# Extras
     "extras;android;m2repository" \
     "extras;google;m2repository" \
     "extras;google;google_play_services" \
-
-# Constraint Layout
-# Please keep these in descending order!
     "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
     "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" \
-
-# google apis
-# Please keep these in descending order!
     "add-ons;addon-google_apis-google-23" \
     "add-ons;addon-google_apis-google-22" \
     "add-ons;addon-google_apis-google-21"

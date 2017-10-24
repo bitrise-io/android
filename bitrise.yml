@@ -178,7 +178,7 @@ workflows:
               docker_push_with_retry "${DOCKERHUB_IMG_ID}:latest"
             fi
     - slack@2.1.0:
-        run_if: .IsCI
+        run_if: '{{.IsCI | and .IsBuildFailed}}'
         inputs:
         - webhook_url: $SLACK_WEBHOOK_URL
         - channel: $SLACK_CHANNEL

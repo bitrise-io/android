@@ -57,6 +57,7 @@ RUN cd /opt \
 
 # Please keep all sections in descending order!
 RUN yes | sdkmanager \
+    "platforms;android-27" \
     "platforms;android-26" \
     "platforms;android-25" \
     "platforms;android-24" \
@@ -67,6 +68,7 @@ RUN yes | sdkmanager \
     "platforms;android-17" \
     "platforms;android-15" \
     "platforms;android-10" \
+    "build-tools;27.0.0" \
     "build-tools;26.0.2" \
     "build-tools;26.0.1" \
     "build-tools;25.0.3" \
@@ -158,5 +160,5 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_10_11_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_10_27_1
 CMD bitrise -version

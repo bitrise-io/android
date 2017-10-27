@@ -1,5 +1,10 @@
 ## UPCOMING
 
+## `v2017_10_27_1`
+
+* new preinstalled packages: `platform-27`, `build-tools-27.0.0`: https://github.com/bitrise-docker/android/pull/130
+    * Thanks [@koral--](https://github.com/koral--) for the PR!
+
 ## `v2017_10_11_1`
 
 * fix android/sdkmanager license issues

@@ -67,7 +67,6 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
-    "platforms;android-10" \
     "build-tools;27.0.0" \
     "build-tools;26.0.2" \
     "build-tools;26.0.1" \
@@ -78,11 +77,13 @@ RUN yes | sdkmanager \
     "build-tools;21.1.2" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
+    "system-images;android-26;google_apis;x86" \
     "system-images;android-25;google_apis;armeabi-v7a" \
     "system-images;android-24;default;armeabi-v7a" \
     "system-images;android-22;default;armeabi-v7a" \
-    "system-images;android-21;default;armeabi-v7a" \
     "system-images;android-19;default;armeabi-v7a" \
+    "emulator" \
+    "tools" \
     "extras;android;m2repository" \
     "extras;google;m2repository" \
     "extras;google;google_play_services" \

@@ -4,8 +4,6 @@
 
 * new preinstalled packages: 
     * `system-images;android-26;google_apis;x86`
-    * `system-images;android-26;google_apis_playstore;x86`
-    * `system-images;android-23;google_apis;x86`
     * `emulator`
     * `tools`
 * removed packages:

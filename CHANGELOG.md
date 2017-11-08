@@ -1,5 +1,17 @@
 ## UPCOMING
 
+## `v2017_11_07_1`
+
+* new preinstalled packages: 
+    * `system-images;android-26;google_apis;x86`
+    * `system-images;android-26;google_apis_playstore;x86`
+    * `system-images;android-23;google_apis;x86`
+    * `emulator`
+    * `tools`
+* removed packages:
+    * `platforms;android-10`
+    * `system-images;android-21;default;armeabi-v7a`
+
 ## `v2017_10_27_1`
 
 * new preinstalled packages: `platform-27`, `build-tools-27.0.0`: https://github.com/bitrise-docker/android/pull/130

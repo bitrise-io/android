@@ -43,14 +43,6 @@ RUN yes | sdkmanager --licenses
 # Platform tools
 RUN sdkmanager "platform-tools"
 
-# Emulator
-# RUN sdkmanager "emulator"
-# For now we'll keep using 26.1.2 ; 26.1.3 had some booting issues...
-RUN cd /opt \
- && wget https://dl.google.com/android/repository/emulator-linux-4077558.zip -O emulator.zip \
- && unzip -q emulator.zip -d ${ANDROID_HOME} \
- && rm emulator.zip
-
 # SDKs
 # Please keep these in descending order!
 # The `yes` is for accepting all non-standard tool licenses.
@@ -67,6 +59,7 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;27.0.1" \
     "build-tools;27.0.0" \
     "build-tools;26.0.2" \
     "build-tools;26.0.1" \
@@ -161,5 +154,5 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_10_27_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_11_08_1
 CMD bitrise -version

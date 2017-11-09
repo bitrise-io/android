@@ -1,5 +1,10 @@
 ## UPCOMING
 
+## `v2017_11_08_2`
+
+* Rollback to the locked Emulator package version, as it was since `v2017_08_10_1`;
+  unfortunately even the latest `emulator` package makes the related tests to fail (ARMv7 emulator fails to boot) ...
+
 ## `v2017_11_08_1`
 
 * new preinstalled packages: `build-tools-27.0.1`: https://github.com/bitrise-docker/android/pull/134

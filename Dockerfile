@@ -47,6 +47,15 @@ RUN sdkmanager "platform-tools"
 # Please keep these in descending order!
 # The `yes` is for accepting all non-standard tool licenses.
 
+# Emulator
+# RUN sdkmanager "emulator"
+# For now we'll keep using 26.1.2 ; 26.1.3 had some booting issues...
+RUN cd /opt \
+ && wget https://dl.google.com/android/repository/emulator-linux-4077558.zip -O emulator.zip \
+ && unzip -q emulator.zip -d ${ANDROID_HOME} \
+ && rm emulator.zip
+
+
 # Please keep all sections in descending order!
 RUN yes | sdkmanager \
     "platforms;android-27" \
@@ -75,7 +84,6 @@ RUN yes | sdkmanager \
     "system-images;android-24;default;armeabi-v7a" \
     "system-images;android-22;default;armeabi-v7a" \
     "system-images;android-19;default;armeabi-v7a" \
-    "emulator" \
     "tools" \
     "extras;android;m2repository" \
     "extras;google;m2repository" \
@@ -154,5 +162,5 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_11_08_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_11_08_2
 CMD bitrise -version

@@ -78,7 +78,6 @@ RUN yes | sdkmanager \
     "build-tools;21.1.2" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
-    "system-images;android-26;google_apis;x86" \
     "system-images;android-25;google_apis;armeabi-v7a" \
     "system-images;android-24;default;armeabi-v7a" \
     "system-images;android-22;default;armeabi-v7a" \
@@ -160,5 +159,5 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_11_10_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2017_11_10_2
 CMD bitrise -version

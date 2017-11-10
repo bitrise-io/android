@@ -1,5 +1,11 @@
 ## UPCOMING
 
+## `v2017_11_10_2`
+
+* Rollback of `system-images;android-26;google_apis;x86` package preinstall;
+  it seems this package has a dependency on a newer `emulator`, if the package is installed the emulator
+  package version will be bumped to `26.1.4` from `26.1.2` ...
+
 ## `v2017_11_10_1`
 
 * Rollback of `tools` package preinstall due to ARM v7 emulator boot issue.

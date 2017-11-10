@@ -43,10 +43,6 @@ RUN yes | sdkmanager --licenses
 # Platform tools
 RUN sdkmanager "platform-tools"
 
-# SDKs
-# Please keep these in descending order!
-# The `yes` is for accepting all non-standard tool licenses.
-
 # Emulator
 # RUN sdkmanager "emulator"
 # For now we'll keep using 26.1.2 ; 26.1.3 had some booting issues...
@@ -55,6 +51,9 @@ RUN cd /opt \
  && unzip -q emulator.zip -d ${ANDROID_HOME} \
  && rm emulator.zip
 
+# SDKs
+# Please keep these in descending order!
+# The `yes` is for accepting all non-standard tool licenses.
 
 # Please keep all sections in descending order!
 RUN yes | sdkmanager \
@@ -84,7 +83,6 @@ RUN yes | sdkmanager \
     "system-images;android-24;default;armeabi-v7a" \
     "system-images;android-22;default;armeabi-v7a" \
     "system-images;android-19;default;armeabi-v7a" \
-    "tools" \
     "extras;android;m2repository" \
     "extras;google;m2repository" \
     "extras;google;google_play_services" \

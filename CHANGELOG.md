@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_11_10_1`
+
+* Rollback of `tools` package preinstall due to ARM v7 emulator boot issue.
+
 ## `v2017_11_08_2`
 
 * Rollback to the locked Emulator package version, as it was since `v2017_08_10_1`;

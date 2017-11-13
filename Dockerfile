@@ -41,15 +41,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 RUN yes | sdkmanager --licenses
 
 # Platform tools
-RUN sdkmanager "platform-tools"
-
-# Emulator
-# RUN sdkmanager "emulator"
-# For now we'll keep using 26.1.2 ; 26.1.3 had some booting issues...
-RUN cd /opt \
- && wget https://dl.google.com/android/repository/emulator-linux-4077558.zip -O emulator.zip \
- && unzip -q emulator.zip -d ${ANDROID_HOME} \
- && rm emulator.zip
+RUN sdkmanager "emulator tools platform-tools"
 
 # SDKs
 # Please keep these in descending order!
@@ -78,6 +70,7 @@ RUN yes | sdkmanager \
     "build-tools;21.1.2" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
+    "system-images;android-26;google_apis;x86" \
     "system-images;android-25;google_apis;armeabi-v7a" \
     "system-images;android-24;default;armeabi-v7a" \
     "system-images;android-22;default;armeabi-v7a" \
@@ -150,7 +143,7 @@ RUN /usr/bin/gcloud config set --installation component_manager/disable_update_c
 # Required for Android ARM Emulator
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
 ENV QT_QPA_PLATFORM offscreen
-ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
+ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib:${ANDROID_HOME}/emulator/lib64
 
 
 # ------------------------------------------------------

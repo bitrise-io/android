@@ -41,7 +41,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 RUN yes | sdkmanager --licenses
 
 # Platform tools
-RUN sdkmanager "emulator tools platform-tools"
+RUN sdkmanager "emulator" "tools" "platform-tools"
 
 # SDKs
 # Please keep these in descending order!

@@ -16,6 +16,11 @@ app:
   # on CI
   - SLACK_WEBHOOK_URL: $SLACK_WEBHOOK_URL
   - SLACK_CHANNEL: $SLACK_CHANNEL
+  # Quay
+  - QUAY_IMG_ID: quay.io/bitriseio/android
+  - QUAY_LOGIN_USER: $QUAY_LOGIN_USER
+  - QUAY_LOGIN_PASS: $QUAY_LOGIN_PASS
+  - IS_ALPHA: "true"
   # optional
   - CONFIG_do_not_deploy_latest_tag: $CONFIG_do_not_deploy_latest_tag
 
@@ -91,15 +96,16 @@ workflows:
               -v "$(which bitrise-bridge):/usr/local/bin/bitrise-bridge" \
               "${DOCKERHUB_IMG_ID}:latest" bash /bitrise/src/system_report.sh
 
-
   _pinned_envs:
     envs:
     - DOCKERHUB_IMG_ID: $DOCKERHUB_IMG_ID_PINNED
     - DOCKER_FILE_PATH: $DOCKER_FILE_PATH_PINNED
+    - IS_ALPHA: "false"
   _alpha_envs:
     envs:
     - DOCKERHUB_IMG_ID: $DOCKERHUB_IMG_ID_ALPHA
     - DOCKER_FILE_PATH: $DOCKER_FILE_PATH_ALPHA
+    - IS_ALPHA: "true"
 
   _generate_image_deploy_tag:
     steps:
@@ -109,23 +115,6 @@ workflows:
             #!/bin/bash
             set -ex
             envman add --key 'DOCKER_IMAGE_DEPLOY_TAG' --value "v$(date +%Y_%m_%d-%H_%M)-b${BITRISE_BUILD_NUMBER}"
-
-  # _slack_start:
-  #   steps:
-  #   - slack@2.1.0:
-  #       run_if: .IsCI
-  #       inputs:
-  #       - webhook_url: $SLACK_WEBHOOK_URL
-  #       - channel: $SLACK_CHANNEL
-  #       - from_username: "$BITRISE_APP_TITLE - OK"
-  #       - from_username_on_error: "$BITRISE_APP_TITLE - ERROR"
-  #       - message: |
-  #           Started:
-
-  #           - Build URL: $BITRISE_BUILD_URL
-  #           - Build Number: $BITRISE_BUILD_NUMBER
-  #           - Image ID: $DOCKERHUB_IMG_ID
-  #           - Image tag: $DOCKER_IMAGE_DEPLOY_TAG
 
   _deploy:
     before_run:
@@ -140,43 +129,43 @@ workflows:
             set -e
             echo "=> Docker login..."
             docker login -u "${DOCKER_LOGIN_USER}" -p "${DOCKER_LOGIN_PASS}"
+            echo "=> Quay.io login..."
+            docker login -u "${QUAY_LOGIN_USER}" -p "${QUAY_LOGIN_PASS}" quay.io
     - script@1.1.0:
         title: docker push
         inputs:
         - content: |
             #!/bin/bash
-
-            function docker_push_with_retry {
-              local push_id="$1"
-              echo " => Pushing: ${push_id} ..."
-              docker push "${push_id}"
-              if [ $? -ne 0 ] ; then
-                echo " (!) WARNING: First push attempt failed - retry..."
-                sleep 10
-                docker push "${push_id}"
-                if [ $? -ne 0 ] ; then
-                  echo " [!] ERROR: Second push attempt failed"
-                  exit 1
-                fi
-              fi
-              echo " => Pushing - OK"
-            }
+            set -ex
 
             if [ -z "${DOCKER_IMAGE_DEPLOY_TAG}" ] ; then
               echo " [!] No DOCKER_IMAGE_DEPLOY_TAG specified!"
               exit 1
             fi
 
-            echo " => Tagging: ${DOCKER_IMAGE_DEPLOY_TAG} ..."
+            ### Tags
+            # Docker Hub
             docker tag "${DOCKERHUB_IMG_ID}:latest" "${DOCKERHUB_IMG_ID}:${DOCKER_IMAGE_DEPLOY_TAG}"
-            if [ $? -ne 0 ] ; then
-              echo " [!] ERROR: failed to tag the image"
-              exit 1
+
+            # Quay.io     
+            if [[ "${IS_ALPHA}" == "true" ]]; then
+              image_tag="alpha-${DOCKER_IMAGE_DEPLOY_TAG}"
+              latest_image_tag="alpha"
+            else
+              image_tag="${DOCKER_IMAGE_DEPLOY_TAG}"
+              latest_image_tag="latest"
             fi
-            docker_push_with_retry "${DOCKERHUB_IMG_ID}:${DOCKER_IMAGE_DEPLOY_TAG}"
-            if [[ "${CONFIG_do_not_deploy_latest_tag}" != "true" ]] ; then
-              docker_push_with_retry "${DOCKERHUB_IMG_ID}:latest"
-            fi
+            docker tag "${DOCKERHUB_IMG_ID}:latest" "${QUAY_IMG_ID}:${image_tag}"
+            docker tag "${DOCKERHUB_IMG_ID}:latest" "${QUAY_IMG_ID}:${latest_image_tag}"
+
+            ### Push
+            # Docker Hub
+            docker push "${DOCKERHUB_IMG_ID}:${DOCKER_IMAGE_DEPLOY_TAG}"
+            docker push "${DOCKERHUB_IMG_ID}:latest"
+
+            # Quay.io
+            docker push "${QUAY_IMG_ID}:${image_tag}"
+            docker push "${QUAY_IMG_ID}:${latest_image_tag}"
     - slack@2.1.0:
         run_if: '{{.IsCI | and .IsBuildFailed}}'
         inputs:

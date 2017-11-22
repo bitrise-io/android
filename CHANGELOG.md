@@ -1,5 +1,10 @@
 ## UPCOMING
 
+## `v2017_11_22_1`
+
+* Updated compatibility, added preinstalled x86 img
+* Updated LD_LIBRARY_PATH ENV
+
 ## `v2017_11_10_2`
 
 * Rollback of `system-images;android-26;google_apis;x86` package preinstall;

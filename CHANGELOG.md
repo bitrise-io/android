@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_12_08_1`
+
+* new preinstalled package: `build-tools-27.0.2`: https://github.com/bitrise-docker/android/pull/144
+
 ## `v2017_11_22_1`
 
 * Updated compatibility, added preinstalled x86 img

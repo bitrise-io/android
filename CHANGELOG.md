@@ -1,5 +1,10 @@
 ## UPCOMING
 
+## `v2017_12_29_1`
+
+* new preinstalled package: `build-tools-27.0.3`: https://github.com/bitrise-docker/android/pull/148
+
+
 ## `v2017_12_08_1`
 
 * new preinstalled package: `build-tools-27.0.2`: https://github.com/bitrise-docker/android/pull/144

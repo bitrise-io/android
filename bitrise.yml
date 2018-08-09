@@ -73,7 +73,6 @@ workflows:
             
             docker rmi -f quay.io/bitriseio/android-ndk
             docker rmi -f quay.io/bitriseio/android
-            
     - script@1.1.0:
         title: docker infos & images
         inputs:

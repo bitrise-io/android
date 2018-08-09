@@ -65,13 +65,22 @@ workflows:
   _rebuild:
     steps:
     - script@1.1.0:
-        title: docker infos & images
+        title: docker prune previous image versions
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+            set -ex
+            
+            if [ $(docker info -f '{{.Images}}') -ne 0 ]; then
+              docker rmi -f $(docker images -aq)
+            fi
+    - script@1.1.0:
+        title: docker infos
         inputs:
         - content: |
             #!/bin/bash
             set -ex
 
-            docker images
             df -kh ./
             docker info
     - script@1.1.0:

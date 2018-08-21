@@ -75,7 +75,7 @@ workflows:
             # https://github.com/moby/moby/issues/36196
             # Therefore, grep / awk magic will be used here
             # The following will capture both android and android-ndk[-lts] images
-            docker rmi -f $(docker images | grep -E 'bitriseio/android' | awk '{print $1}')
+            docker rmi -f $(docker images | grep -E 'bitriseio/android' | awk '{print $1 ":" $2}')
     - script@1.1.0:
         title: docker infos & images
         inputs:

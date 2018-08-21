@@ -71,8 +71,10 @@ workflows:
             #!/usr/bin/env bash
             set -ex
             
-            docker rmi -f quay.io/bitriseio/android-ndk
-            docker rmi -f quay.io/bitriseio/android
+            # Docker filter does not match slashes (on a purpose)
+            # https://github.com/moby/moby/issues/36196
+            # Therefore, grep / awk magic will be used here
+            docker rmi -f $(docker images | grep -E 'bitriseio/android-ndk|bitriseio/android' | awk '{print $1}')
     - script@1.1.0:
         title: docker infos & images
         inputs:

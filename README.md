@@ -2,7 +2,7 @@
 
 Android Docker image, based on the Bitrise Base Docker
 image ( https://github.com/bitrise-docker/android / `bitriseio/docker-bitrise-base` ),
-and extends it with pre-installed Android tools/setup.
+and extends it with pre-installed Android SDK tools/setup.
 
 This docker image is pre-cached on the related [bitrise.io](https://www.bitrise.io)
 Virtual Machines.

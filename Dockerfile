@@ -49,6 +49,7 @@ RUN sdkmanager "emulator" "tools" "platform-tools"
 
 # Please keep all sections in descending order!
 RUN yes | sdkmanager \
+    "platforms;android-29" \
     "platforms;android-28" \
     "platforms;android-27" \
     "platforms;android-26" \
@@ -60,6 +61,7 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;29.0.0" \
     "build-tools;28.0.3" \
     "build-tools;28.0.2" \
     "build-tools;28.0.1" \
@@ -77,6 +79,7 @@ RUN yes | sdkmanager \
     "build-tools;21.1.2" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
+    "system-images;android-29;google_apis;x86" \
     "system-images;android-28;google_apis;x86" \
     "system-images;android-26;google_apis;x86" \
     "system-images;android-25;google_apis;armeabi-v7a" \
@@ -160,5 +163,5 @@ ENV LD_LIBRARY_PATH ${ANDROID_HOME}/tools/lib64:${ANDROID_HOME}/emulator/lib64:$
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2018_10_05_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2019_06_21_1
 CMD bitrise -version

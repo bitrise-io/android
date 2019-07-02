@@ -1,4 +1,11 @@
 ## UPCOMING
+## `v2019_06_21_1`
+
+* new preinstalled packages:
+    * `platforms;android-29`
+    * `build-tools-29.0.0`
+    * `system-images;android-29;google_apis;x86`
+https://github.com/bitrise-docker/android/pull/235
 
 ## `v2018_10_05_1`
 

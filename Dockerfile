@@ -21,7 +21,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 l
 # --- Download Android SDK tools into $ANDROID_HOME
 
 RUN cd /opt \
-    && wget -q https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -O android-sdk-tools.zip \
+    && wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk-tools.zip \
     && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
     && rm android-sdk-tools.zip
 
@@ -39,6 +39,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 # License is valid for all the standard components in versions installed from this file
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
 RUN yes | sdkmanager  --licenses
+RUN yes | sdkmanager --update --channel=3
 
 RUN touch /root/.android/repositories.cfg
 
@@ -51,7 +52,6 @@ RUN sdkmanager "emulator" "tools" "platform-tools"
 
 # Please keep all sections in descending order!
 
-RUN sdkmanager --update --channel=3
 RUN yes | sdkmanager \
    "platforms;android-29" \
    "platforms;android-28" \

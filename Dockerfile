@@ -66,7 +66,7 @@ RUN yes | sdkmanager \
     "platforms;android-15" \
     "build-tools;29.0.0" \
     "build-tools;28.0.3" \
-    "build-tools;28.0.2"\
+    "build-tools;28.0.2" \
     "build-tools;28.0.1" \
     "build-tools;28.0.0" \
     "build-tools;27.0.3" \
@@ -96,7 +96,7 @@ RUN yes | sdkmanager \
     "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" \
     "add-ons;addon-google_apis-google-23" \
     "add-ons;addon-google_apis-google-22" \
-    "add-ons;addon-google_apis-google-21" 
+    "add-ons;addon-google_apis-google-21"
 
 # ------------------------------------------------------
 # --- Install Gradle from PPA

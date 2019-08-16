@@ -64,6 +64,8 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;29.0.2" \
+    "build-tools;29.0.1" \
     "build-tools;29.0.0" \
     "build-tools;28.0.3" \
     "build-tools;28.0.2" \
@@ -166,5 +168,5 @@ ENV LD_LIBRARY_PATH ${ANDROID_HOME}/tools/lib64:${ANDROID_HOME}/emulator/lib64:$
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2019_06_21_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2019_08_11_1
 CMD bitrise -version

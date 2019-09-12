@@ -44,6 +44,16 @@ echo "========================================"
 echo
 
 echo
+echo "=== Firebase Tools components =========="
+if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
+    echo " (!) Not pre-installed on this Stack / in this image"
+else
+    firebase --version
+fi
+echo "========================================"
+echo
+
+echo
 echo "=== Google Cloud Network Check ========="
 if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
     echo " (!) Not pre-installed on this Stack / in this image"

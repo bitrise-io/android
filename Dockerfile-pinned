@@ -3,6 +3,6 @@
 # is pre-cached on https://www.bitrise.io/ Linux/Android Virtual Machines.
 # Read more about how versions are handled in the README.md
 
-FROM quay.io/bitriseio/android:alpha-v2019_09_12-02_30-b1733
+FROM quay.io/bitriseio/android:alpha-v2019_09_19-02_33-b1743
 
 CMD bitrise --version

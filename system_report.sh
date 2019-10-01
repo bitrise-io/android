@@ -102,3 +102,15 @@ echo "* ./system-images:"
 tree -L 3 ${ANDROID_HOME}/system-images
 echo "========================================"
 echo
+
+echo
+echo "=== Android APK tools =================="
+echo
+echo "* aapt2:"
+/opt/apktools/aapt2 version
+echo
+echo "* bundletool:"
+java -jar /opt/apktools/bundletool.jar version
+echo
+echo "========================================"
+echo

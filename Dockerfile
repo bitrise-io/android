@@ -2,6 +2,7 @@ FROM quay.io/bitriseio/bitrise-base:alpha
 
 ENV ANDROID_HOME /opt/android-sdk-linux
 
+
 # ------------------------------------------------------
 # --- Install required tools
 

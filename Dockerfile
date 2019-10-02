@@ -170,6 +170,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
 ENV QT_QPA_PLATFORM offscreen
 ENV LD_LIBRARY_PATH ${ANDROID_HOME}/tools/lib64:${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
 
+# -------------------------------------------------------
+# Tools to parse apk/aab info in deploy-to-bitrise-io step
+ENV APKINFO_TOOLS /opt/apktools
+RUN mkdir ${APKINFO_TOOLS}
+RUN wget -q https://github.com/google/bundletool/releases/download/0.10.3/bundletool-all-0.10.3.jar -O ${APKINFO_TOOLS}/bundletool.jar
+RUN cd /opt \
+    && wget -q https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2/3.5.0-5435860/aapt2-3.5.0-5435860-linux.jar -O aapt2.jar \
+    && unzip -q aapt2.jar aapt2 -d ${APKINFO_TOOLS} \
+    && rm aapt2.jar
 
 # ------------------------------------------------------
 # --- Cleanup and rev num

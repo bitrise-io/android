@@ -107,7 +107,11 @@ echo
 echo "=== Android APK tools =================="
 echo
 echo "* aapt2:"
-/opt/apktools/aapt2 version
+if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
+    echo " (!) aapt2 does not exist on LTS"
+else
+    /opt/apktools/aapt2 version
+fi
 echo
 echo "* bundletool:"
 java -jar /opt/apktools/bundletool.jar version

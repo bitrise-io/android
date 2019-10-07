@@ -152,6 +152,15 @@ RUN /usr/bin/gcloud config set --installation component_manager/disable_update_c
  && /usr/bin/gcloud config set --installation core/disable_usage_reporting true \
  && sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\": true/g' $GCLOUD_SDK_CONFIG
 
+# ------------------------------------------------------
+# --- Install Firebase Tools (Firebase CLI)
+# https://github.com/firebase/firebase-tools
+#
+# It's required for using Firebase App Distribution.
+#  https://firebase.google.com/products/app-distribution
+#
+
+RUN npm install -g firebase-tools
 
 # ------------------------------------------------------
 # --- Install additional packages

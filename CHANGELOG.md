@@ -8,6 +8,7 @@ https://github.com/bitrise-io/android/pull/241
 ## `v2019_08_11_1`
 
 * new preinstalled packages:
+    * `firebase-tools-7.4.0`: https://github.com/bitrise-io/android/pull/256
     * `build-tools-29.0.2`
     * `build-tools-29.0.1`
  https://github.com/bitrise-docker/android/pull/246

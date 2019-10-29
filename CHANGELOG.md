@@ -1,4 +1,10 @@
 ## UPCOMING
+
+## `v2019_10_04_1`
+
+* Add `net-tools` to pre-installed tools.
+https://github.com/bitrise-io/android/pull/241
+
 ## `v2019_08_11_1`
 
 * new preinstalled packages:

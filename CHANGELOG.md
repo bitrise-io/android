@@ -1,5 +1,10 @@
 ## UPCOMING
 
+## `v2020_01_30_1`
+
+* new preinstalled package: `build-tools-29.0.3`
+ https://github.com/bitrise-docker/android/pull/279
+
 ## `v2019_10_04_1`
 
 * Add `net-tools` to pre-installed tools.

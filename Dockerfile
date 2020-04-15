@@ -64,6 +64,7 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;29.0.3" \
     "build-tools;29.0.2" \
     "build-tools;29.0.1" \
     "build-tools;29.0.0" \
@@ -186,5 +187,5 @@ RUN cd /opt \
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2019_08_11_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_01_30_1
 CMD bitrise -version

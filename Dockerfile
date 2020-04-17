@@ -105,9 +105,13 @@ RUN yes | sdkmanager \
 # --- Install Gradle from PPA
 
 # Gradle PPA
-RUN apt-get update \
- && apt-get -y install gradle \
- && gradle -v
+ENV GRADLE_VERSION=6.3
+RUN wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -P /tmp \
+    && unzip -d /opt/gradle /tmp/gradle-*.zip \
+    && chmod +775 /opt/gradle \
+    && PATH=$PATH:"/opt/gradle/gradle-6.3/bin/" \
+    && gradle --version \
+    && rm -rf /tmp/gradle*
 
 # ------------------------------------------------------
 # --- Install Maven 3 from PPA
@@ -187,5 +191,5 @@ RUN cd /opt \
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_01_30_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_04_17_1
 CMD bitrise -version

@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2020_04_17_1`
+* `Gradle updated to 6.3`
+
 ## `v2020_01_30_1`
 
 * new preinstalled package: `build-tools-29.0.3`

@@ -106,10 +106,10 @@ RUN yes | sdkmanager \
 
 # Gradle PPA
 ENV GRADLE_VERSION=6.3
+ENV PATH=$PATH:"/opt/gradle/gradle-6.3/bin/"
 RUN wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -P /tmp \
     && unzip -d /opt/gradle /tmp/gradle-*.zip \
     && chmod +775 /opt/gradle \
-    && PATH=$PATH:"/opt/gradle/gradle-6.3/bin/" \
     && gradle --version \
     && rm -rf /tmp/gradle*
 

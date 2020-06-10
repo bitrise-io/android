@@ -1,7 +1,22 @@
 ## UPCOMING
+
+## `v2020_04_17_1`
+* `Gradle updated to 6.3`
+
+## `v2020_01_30_1`
+
+* new preinstalled package: `build-tools-29.0.3`
+ https://github.com/bitrise-docker/android/pull/279
+
+## `v2019_10_04_1`
+
+* Add `net-tools` to pre-installed tools.
+https://github.com/bitrise-io/android/pull/241
+
 ## `v2019_08_11_1`
 
 * new preinstalled packages:
+    * `firebase-tools-7.4.0`: https://github.com/bitrise-io/android/pull/256
     * `build-tools-29.0.2`
     * `build-tools-29.0.1`
  https://github.com/bitrise-docker/android/pull/246

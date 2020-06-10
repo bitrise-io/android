@@ -44,6 +44,16 @@ echo "========================================"
 echo
 
 echo
+echo "=== Firebase Tools components =========="
+if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
+    echo " (!) Not pre-installed on this Stack / in this image"
+else
+    firebase --version
+fi
+echo "========================================"
+echo
+
+echo
 echo "=== Google Cloud Network Check ========="
 if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
     echo " (!) Not pre-installed on this Stack / in this image"
@@ -107,10 +117,18 @@ echo
 echo "=== Android APK tools =================="
 echo
 echo "* aapt2:"
-/opt/apktools/aapt2 version
+if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
+    echo " (!) Not pre-installed on this Stack / in this image"
+else
+    /opt/apktools/aapt2 version
+fi
 echo
 echo "* bundletool:"
-java -jar /opt/apktools/bundletool.jar version
+if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
+    echo " (!) Not pre-installed on this Stack / in this image"
+else
+    java -jar /opt/apktools/bundletool.jar version
+fi
 echo
 echo "========================================"
 echo

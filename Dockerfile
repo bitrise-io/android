@@ -14,7 +14,7 @@ RUN apt-get update -qq
 # Dependencies to execute Android builds
 RUN dpkg --add-architecture i386
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
 
 
 # ------------------------------------------------------
@@ -64,6 +64,7 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;29.0.3" \
     "build-tools;29.0.2" \
     "build-tools;29.0.1" \
     "build-tools;29.0.0" \
@@ -85,7 +86,7 @@ RUN yes | sdkmanager \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
     "system-images;android-29;google_apis;x86" \
-    "system-images;android-28;google_apis;x86" \
+    "system-images;android-28;google_apis;x86_64" \
     "system-images;android-26;google_apis;x86" \
     "system-images;android-25;google_apis;armeabi-v7a" \
     "system-images;android-24;default;armeabi-v7a" \
@@ -104,9 +105,13 @@ RUN yes | sdkmanager \
 # --- Install Gradle from PPA
 
 # Gradle PPA
-RUN apt-get update \
- && apt-get -y install gradle \
- && gradle -v
+ENV GRADLE_VERSION=6.3
+ENV PATH=$PATH:"/opt/gradle/gradle-6.3/bin/"
+RUN wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -P /tmp \
+    && unzip -d /opt/gradle /tmp/gradle-*.zip \
+    && chmod +775 /opt/gradle \
+    && gradle --version \
+    && rm -rf /tmp/gradle*
 
 # ------------------------------------------------------
 # --- Install Maven 3 from PPA
@@ -152,6 +157,15 @@ RUN /usr/bin/gcloud config set --installation component_manager/disable_update_c
  && /usr/bin/gcloud config set --installation core/disable_usage_reporting true \
  && sed -i -- 's/\"disable_usage_reporting\": false/\"disable_usage_reporting\": true/g' $GCLOUD_SDK_CONFIG
 
+# ------------------------------------------------------
+# --- Install Firebase Tools (Firebase CLI)
+# https://github.com/firebase/firebase-tools
+#
+# It's required for using Firebase App Distribution.
+#  https://firebase.google.com/products/app-distribution
+#
+
+RUN npm install -g firebase-tools
 
 # ------------------------------------------------------
 # --- Install additional packages
@@ -177,5 +191,5 @@ RUN cd /opt \
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2019_08_11_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_04_17_1
 CMD bitrise -version

@@ -18,14 +18,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 l
 
 
 # ------------------------------------------------------
-# --- Download Android SDK tools into $ANDROID_HOME
+# --- Download Android Command line Tools into $ANDROID_HOME
 
 RUN cd /opt \
-    && wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk-tools.zip \
-    && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
-    && rm android-sdk-tools.zip
+    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-6514223_latest.zip -O android-commandline-tools.zip \
+    && mkdir -p ${ANDROID_HOME}/cmdline-tools \
+    && unzip -q android-commandline-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
+    && rm android-commandline-tools.zip
 
-ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/tools/bin
 
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages
@@ -43,7 +44,7 @@ RUN yes | sdkmanager  --licenses
 RUN touch /root/.android/repositories.cfg
 
 # Platform tools
-RUN sdkmanager "emulator" "tools" "platform-tools"
+RUN sdkmanager "emulator" "cmdline-tools;2.0" "platform-tools"
 
 # SDKs
 # Please keep these in descending order!
@@ -191,5 +192,5 @@ RUN cd /opt \
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_04_17_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_06_14_1
 CMD bitrise -version

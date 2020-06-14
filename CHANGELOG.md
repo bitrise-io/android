@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2020_06_14_1`
+
+* Deprecated SDK tools replaced with Command line Tools: https://github.com/bitrise-docker/android/pull/300
+
 ## `v2020_04_17_1`
 * `Gradle updated to 6.3`
 

@@ -43,7 +43,7 @@ RUN yes | sdkmanager  --licenses
 
 RUN touch /root/.android/repositories.cfg
 
-# Platform tools
+# Emulator and Platform tools
 RUN yes | sdkmanager "emulator" "platform-tools"
 
 # SDKs

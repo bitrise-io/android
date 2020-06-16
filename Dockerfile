@@ -26,7 +26,7 @@ RUN cd /opt \
     && unzip -q android-commandline-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
     && rm android-commandline-tools.zip
 
-ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/tools/bin
+ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/tools/bin
 
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages
@@ -44,7 +44,7 @@ RUN yes | sdkmanager  --licenses
 RUN touch /root/.android/repositories.cfg
 
 # Platform tools
-RUN sdkmanager "emulator" "cmdline-tools;2.0" "platform-tools"
+RUN yes | sdkmanager "emulator" "platform-tools"
 
 # SDKs
 # Please keep these in descending order!

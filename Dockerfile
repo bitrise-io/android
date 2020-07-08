@@ -21,12 +21,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 l
 # --- Download Android Command line Tools into $ANDROID_HOME
 
 RUN cd /opt \
-    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-6514223_latest.zip -O android-commandline-tools.zip \
-    && mkdir -p ${ANDROID_HOME}/cmdline-tools/latest \
-    && unzip -q android-commandline-tools.zip -d ${ANDROID_HOME}/cmdline-tools/latest \
+    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -O android-commandline-tools.zip \
+    && mkdir -p ${ANDROID_HOME}/cmdline-tools \
+    && unzip -q android-commandline-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
     && rm android-commandline-tools.zip
 
-ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/latest/tools/bin
+ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/tools/bin
 
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages
@@ -44,7 +44,7 @@ RUN yes | sdkmanager  --licenses
 RUN touch /root/.android/repositories.cfg
 
 # Emulator and Platform tools
-RUN yes | sdkmanager "cmdline-tools;latest" "emulator" "platform-tools"
+RUN yes | sdkmanager "emulator" "platform-tools"
 
 # SDKs
 # Please keep these in descending order!

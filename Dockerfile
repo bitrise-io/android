@@ -174,7 +174,7 @@ RUN npm install -g firebase-tools
 # Required for Android ARM Emulator
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
 ENV QT_QPA_PLATFORM offscreen
-ENV LD_LIBRARY_PATH ${ANDROID_HOME}/tools/lib64:${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
+ENV LD_LIBRARY_PATH ${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
 
 # -------------------------------------------------------
 # Tools to parse apk/aab info in deploy-to-bitrise-io step

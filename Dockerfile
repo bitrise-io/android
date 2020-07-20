@@ -53,6 +53,7 @@ RUN yes | sdkmanager "emulator" "platform-tools"
 RUN yes | sdkmanager --update --channel=3
 # Please keep all sections in descending order!
 RUN yes | sdkmanager \
+    "platforms;android-30" \
     "platforms;android-29" \
     "platforms;android-28" \
     "platforms;android-27" \
@@ -65,6 +66,7 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;30.0.0" \
     "build-tools;29.0.3" \
     "build-tools;29.0.2" \
     "build-tools;29.0.1" \
@@ -86,6 +88,7 @@ RUN yes | sdkmanager \
     "build-tools;21.1.2" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
+    "system-images;android-30;google_apis;x86" \
     "system-images;android-29;google_apis;x86" \
     "system-images;android-28;google_apis;x86_64" \
     "system-images;android-26;google_apis;x86" \

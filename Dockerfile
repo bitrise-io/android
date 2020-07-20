@@ -87,6 +87,7 @@ RUN yes | sdkmanager \
     "build-tools;21.1.2" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
+    "system-images;android-30;google_apis;x86" \
     "system-images;android-29;google_apis;x86" \
     "system-images;android-28;google_apis;x86" \
     "system-images;android-26;google_apis;x86" \

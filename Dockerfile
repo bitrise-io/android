@@ -89,7 +89,7 @@ RUN yes | sdkmanager \
     "build-tools;17.0.0" \
     "system-images;android-30;google_apis;x86" \
     "system-images;android-29;google_apis;x86" \
-    "system-images;android-28;google_apis;x86" \
+    "system-images;android-28;google_apis;x86_64" \
     "system-images;android-26;google_apis;x86" \
     "system-images;android-25;google_apis;armeabi-v7a" \
     "system-images;android-24;default;armeabi-v7a" \

@@ -6,6 +6,7 @@ ENV ANDROID_HOME /opt/android-sdk-linux
 # ------------------------------------------------------
 # --- Install required tools
 
+RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update -qq
 
 # Base (non android specific) tools
@@ -14,7 +15,7 @@ RUN apt-get update -qq
 # Dependencies to execute Android builds
 RUN dpkg --add-architecture i386
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-11-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
 
 
 # ------------------------------------------------------

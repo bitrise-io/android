@@ -46,7 +46,7 @@ RUN yes | ${SDKMANAGER_PATH}  --licenses
 RUN touch /root/.android/repositories.cfg
 
 # Emulator and Platform tools
-RUN yes | ${SDKMANAGER_PATH} "emulator" "platform-tools"
+RUN yes | sudo ${SDKMANAGER_PATH} "emulator" "platform-tools"
 
 # SDKs
 # Please keep these in descending order!

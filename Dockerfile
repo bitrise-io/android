@@ -15,7 +15,7 @@ RUN apt-get update -qq
 # Dependencies to execute Android builds
 RUN dpkg --add-architecture i386
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-11-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk openjdk-11-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
 
 
 # ------------------------------------------------------
@@ -46,7 +46,7 @@ RUN yes | ${SDKMANAGER_PATH}  --licenses
 RUN touch /root/.android/repositories.cfg
 
 # Emulator and Platform tools
-RUN yes | sudo ${SDKMANAGER_PATH} "emulator" "platform-tools"
+RUN yes | ${SDKMANAGER_PATH} "emulator" "platform-tools"
 
 # SDKs
 # Please keep these in descending order!

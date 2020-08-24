@@ -32,7 +32,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/to
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages
 
-ENV SDKMANAGER_PATH /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager
+# ENV SDKMANAGER_PATH /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager
 # Other tools and resources of Android SDK
 #  you should only install the packages you need!
 # To get a full list of available options you can use:
@@ -41,20 +41,24 @@ ENV SDKMANAGER_PATH /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager
 # Accept licenses before installing components, no need to echo y for each component
 # License is valid for all the standard components in versions installed from this file
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
-RUN yes | ${SDKMANAGER_PATH}  --licenses
+RUN yes | sdkmanager --licenses 
+#${SDKMANAGER_PATH}  --licenses
 
 RUN touch /root/.android/repositories.cfg
 
 # Emulator and Platform tools
-RUN yes | ${SDKMANAGER_PATH} "emulator" "platform-tools"
+RUN yes | sdkmanager "emulator" "platform-tools"
+# RUN yes | ${SDKMANAGER_PATH} "emulator" "platform-tools"
 
 # SDKs
 # Please keep these in descending order!
 # The `yes` is for accepting all non-standard tool licenses.
 
-RUN yes | ${SDKMANAGER_PATH} --update --channel=3
+RUN yes | sdkmanager --update --channel=3
+# RUN yes | ${SDKMANAGER_PATH} --update --channel=3
 # Please keep all sections in descending order!
-RUN yes | ${SDKMANAGER_PATH} \
+# RUN yes | ${SDKMANAGER_PATH} \
+RUN yes | sdkmanager \
     "platforms;android-30" \
     "platforms;android-29" \
     "platforms;android-28" \

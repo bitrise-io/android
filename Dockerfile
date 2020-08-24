@@ -15,7 +15,7 @@ RUN apt-get update -qq
 # Dependencies to execute Android builds
 RUN dpkg --add-architecture i386
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk openjdk-11-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-11-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
 
 
 # ------------------------------------------------------
@@ -40,7 +40,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/to
 # Accept licenses before installing components, no need to echo y for each component
 # License is valid for all the standard components in versions installed from this file
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
-RUN yes | sdkmanager --licenses 
+RUN yes | sdkmanager --licenses
 
 RUN touch /root/.android/repositories.cfg
 

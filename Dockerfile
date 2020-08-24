@@ -47,7 +47,7 @@ RUN yes | sdkmanager --licenses
 RUN touch /root/.android/repositories.cfg
 
 # Emulator and Platform tools
-RUN yes | /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "emulator" "platform-tools"
+RUN yes | sdkmanager "emulator" "platform-tools"
 
 # SDKs
 # Please keep these in descending order!

@@ -6,7 +6,6 @@ ENV ANDROID_HOME /opt/android-sdk-linux
 # ------------------------------------------------------
 # --- Install required tools
 
-RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update -qq
 
 # Base (non android specific) tools
@@ -15,12 +14,8 @@ RUN apt-get update -qq
 # Dependencies to execute Android builds
 RUN dpkg --add-architecture i386
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-11-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk libc6:i386 libstdc++6:i386 libgcc1:i386 libncurses5:i386 libz1:i386 net-tools
 
-# Keystore format has changed since JAVA 8 https://bugs.launchpad.net/ubuntu/+source/openjdk-9/+bug/1743139
-RUN mv /etc/ssl/certs/java/cacerts /etc/ssl/certs/java/cacerts.old \
-    && keytool -importkeystore -destkeystore /etc/ssl/certs/java/cacerts -deststoretype jks -deststorepass changeit -srckeystore /etc/ssl/certs/java/cacerts.old -srcstoretype pkcs12 -srcstorepass changeit \
-    && rm /etc/ssl/certs/java/cacerts.old
 
 # ------------------------------------------------------
 # --- Download Android Command line Tools into $ANDROID_HOME
@@ -44,7 +39,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/to
 # Accept licenses before installing components, no need to echo y for each component
 # License is valid for all the standard components in versions installed from this file
 # Non-standard components: MIPS system images, preview versions, GDK (Google Glass) and Android Google TV require separate licenses, not accepted there
-RUN yes | sdkmanager --licenses
+RUN yes | sdkmanager  --licenses
 
 RUN touch /root/.android/repositories.cfg
 

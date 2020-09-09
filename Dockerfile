@@ -132,6 +132,8 @@ RUN apt-get purge maven maven2 \
  && apt-get -y install maven \
  && mvn --version
 
+# Reselect JAVA 8  as default
+RUN sudo update-java-alternatives --jre-headless --set java-1.8.0-openjdk-amd64
 
 # ------------------------------------------------------
 # --- Pre-install Ionic and Cordova CLIs

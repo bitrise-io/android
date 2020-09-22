@@ -1,5 +1,12 @@
 ## UPCOMING
 
+## `v2020_09_22_1`
+
+* new preinstalled package: `build-tools-30.0.2`
+* Deprecated ANDROID_HOME replaced with ANDROID_SDK_ROOT
+
+https://github.com/bitrise-docker/android/pull/318
+
 ## `v2020_06_14_1`
 
 * Deprecated SDK tools replaced with Command line Tools: https://github.com/bitrise-docker/android/pull/300

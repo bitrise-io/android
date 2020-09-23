@@ -115,8 +115,6 @@ RUN yes | sdkmanager \
 # ------------------------------------------------------
 # --- Install Gradle from PPA
 
-RUN java -version
-
 # Gradle PPA
 ENV GRADLE_VERSION=6.3
 ENV PATH=$PATH:"/opt/gradle/gradle-6.3/bin/"
@@ -133,8 +131,6 @@ RUN apt-get purge maven maven2 \
  && apt-get update \
  && apt-get -y install maven \
  && mvn --version
-
-RUN java -version
 
 # Reselect JAVA 8  as default
 RUN sudo update-java-alternatives --jre-headless --set java-1.8.0-openjdk-amd64

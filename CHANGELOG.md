@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2020+09_30_1`
+
+* Java 11 preinstalled
+
 ## `v2020_06_14_1`
 
 * Deprecated SDK tools replaced with Command line Tools: https://github.com/bitrise-docker/android/pull/300

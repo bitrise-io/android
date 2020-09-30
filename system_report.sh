@@ -33,6 +33,12 @@ fi
 echo "========================================"
 echo
 
+echo "=== Java ==============================="
+
+echo "* JAVA_HOME: $JAVA_HOME"
+ver_line="$( java -version 2>&1  | head -n 1)" ;          echo "* Java: $ver_line"
+ver_line="$( javac -version 2>&1  | head -n 1)" ;         echo "* Javac: $ver_line"
+
 echo
 echo "=== Google Cloud SDK components ========"
 if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then

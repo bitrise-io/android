@@ -23,6 +23,7 @@ RUN mv /etc/ssl/certs/java/cacerts /etc/ssl/certs/java/cacerts.old \
 
 # Select JAVA 8  as default
 RUN sudo update-java-alternatives --jre-headless --set java-1.8.0-openjdk-amd64
+RUN sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
 
 # ------------------------------------------------------
 # --- Download Android Command line Tools into $ANDROID_HOME
@@ -134,6 +135,7 @@ RUN apt-get purge maven maven2 \
 
 # Reselect JAVA 8  as default
 RUN sudo update-java-alternatives --jre-headless --set java-1.8.0-openjdk-amd64
+RUN sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # ------------------------------------------------------

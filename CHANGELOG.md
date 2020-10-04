@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2020_09_30_1`
+
+* Java 11 preinstalled
+
 ## `v2020_09_22_1`
 
 * new preinstalled package: `build-tools-30.0.2`

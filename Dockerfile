@@ -1,7 +1,8 @@
 FROM quay.io/bitriseio/bitrise-base:alpha
 
+ENV ANDROID_SDK_ROOT /opt/android-sdk-linux
+# Preserved for backwards compatibility
 ENV ANDROID_HOME /opt/android-sdk-linux
-
 
 # ------------------------------------------------------
 # --- Install required tools
@@ -26,15 +27,15 @@ RUN sudo update-java-alternatives --jre-headless --set java-1.8.0-openjdk-amd64
 RUN sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
 
 # ------------------------------------------------------
-# --- Download Android Command line Tools into $ANDROID_HOME
+# --- Download Android Command line Tools into $ANDROID_SDK_ROOT
 
 RUN cd /opt \
     && wget -q https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -O android-commandline-tools.zip \
-    && mkdir -p ${ANDROID_HOME}/cmdline-tools \
-    && unzip -q android-commandline-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
+    && mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools \
+    && unzip -q android-commandline-tools.zip -d ${ANDROID_SDK_ROOT}/cmdline-tools \
     && rm android-commandline-tools.zip
 
-ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/tools/bin
+ENV PATH ${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin
 
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages
@@ -74,6 +75,7 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;30.0.2" \
     "build-tools;30.0.0" \
     "build-tools;29.0.3" \
     "build-tools;29.0.2" \
@@ -189,7 +191,7 @@ RUN npm install -g firebase-tools
 # Required for Android ARM Emulator
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
 ENV QT_QPA_PLATFORM offscreen
-ENV LD_LIBRARY_PATH ${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
+ENV LD_LIBRARY_PATH ${ANDROID_SDK_ROOT}/emulator/lib64:${ANDROID_SDK_ROOT}/emulator/lib64/qt/lib
 
 # -------------------------------------------------------
 # Tools to parse apk/aab info in deploy-to-bitrise-io step
@@ -207,5 +209,5 @@ RUN cd /opt \
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_06_14_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_09_22_1
 CMD bitrise -version

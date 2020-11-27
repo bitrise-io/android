@@ -142,7 +142,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # ------------------------------------------------------
 # --- Pre-install jq
-RUN sudo apt-get install jq
+RUN sudo apt-get -y install jq
 
 # ------------------------------------------------------
 # --- Pre-install Ionic and Cordova CLIs

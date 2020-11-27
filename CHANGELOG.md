@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2020_11_27_1`
+
+* jq preinstalled
+
 ## `v2020_09_30_1`
 
 * Java 11 preinstalled

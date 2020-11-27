@@ -30,6 +30,8 @@ else
     ver_line="$(ionic --version)" ;                       echo "* Ionic CLI version: $ver_line"
 fi
 
+ver_line="$(jq --version)" ;                 echo "* jq: $ver_line"
+
 echo "========================================"
 echo
 

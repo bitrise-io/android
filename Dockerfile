@@ -141,6 +141,10 @@ RUN sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/j
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # ------------------------------------------------------
+# --- Pre-install jq
+RUN sudo apt-get install jq
+
+# ------------------------------------------------------
 # --- Pre-install Ionic and Cordova CLIs
 
 RUN npm install -g ionic cordova

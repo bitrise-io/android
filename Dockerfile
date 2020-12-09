@@ -143,7 +143,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 # ------------------------------------------------------
 # --- Pre-install Ionic and Cordova CLIs
 
-RUN npm install -g ionic cordova
+RUN npm install -g ionic cordova appcenter-cli
 
 
 # ------------------------------------------------------

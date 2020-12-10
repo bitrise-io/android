@@ -26,8 +26,9 @@ ver_line="$( javac -version 2>&1 )" ;                 echo "* Java: $ver_line"
 if [[ ! -z "$BITRISE_DOCKER_REV_NUMBER_ANDROID_NDK_LTS" ]] ; then
     echo " (!) Cordova & Ionic are not preinstalled on this Stack / in this image"
 else
-    ver_line="$(cordova --version)" ;                     echo "* Cordova CLI version: $ver_line"
-    ver_line="$(ionic --version)" ;                       echo "* Ionic CLI version: $ver_line"
+    ver_line="$(cordova --version)" ;                       echo "* Cordova CLI version: $ver_line"
+    ver_line="$(ionic --version)" ;                         echo "* Ionic CLI version: $ver_line"
+    ver_line="$(appcenter --version | awk '{print $3}')" ;  echo "* Appcenter-CLI version: $ver_line"
 fi
 
 echo "========================================"

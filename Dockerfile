@@ -30,7 +30,7 @@ RUN sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/j
 # --- Download Android Command line Tools into $ANDROID_SDK_ROOT
 
 RUN cd /opt \
-    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -O android-commandline-tools.zip \
+    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O android-commandline-tools.zip \
     && mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools \
     && unzip -q android-commandline-tools.zip -d ${ANDROID_SDK_ROOT}/cmdline-tools \
     && rm android-commandline-tools.zip
@@ -75,6 +75,7 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;30.0.3" \
     "build-tools;30.0.2" \
     "build-tools;30.0.0" \
     "build-tools;29.0.3" \
@@ -197,9 +198,9 @@ ENV LD_LIBRARY_PATH ${ANDROID_SDK_ROOT}/emulator/lib64:${ANDROID_SDK_ROOT}/emula
 # Tools to parse apk/aab info in deploy-to-bitrise-io step
 ENV APKINFO_TOOLS /opt/apktools
 RUN mkdir ${APKINFO_TOOLS}
-RUN wget -q https://github.com/google/bundletool/releases/download/0.10.3/bundletool-all-0.10.3.jar -O ${APKINFO_TOOLS}/bundletool.jar
+RUN wget -q https://github.com/google/bundletool/releases/download/1.4.0/bundletool-all-1.4.0.jar -O ${APKINFO_TOOLS}/bundletool.jar
 RUN cd /opt \
-    && wget -q https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2/3.5.0-5435860/aapt2-3.5.0-5435860-linux.jar -O aapt2.jar \
+    && wget -q https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2/4.1.1-6503028/aapt2-4.1.1-6503028-linux.jar -O aapt2.jar \
     && unzip -q aapt2.jar aapt2 -d ${APKINFO_TOOLS} \
     && rm aapt2.jar
 
@@ -209,5 +210,5 @@ RUN cd /opt \
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_09_22_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_12_15_1
 CMD bitrise -version

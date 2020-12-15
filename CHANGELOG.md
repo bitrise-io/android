@@ -1,5 +1,12 @@
 ## UPCOMING
 
+## `v2020_12_15_1`
+
+* new preinstalled package `build-tools-30.0.3`
+* bundletool updated to 1.4.0.jar
+* aapt2 updated to 4.1.1-6503028
+* commandline tools updated to 6858069
+
 ## `v2020_09_30_1`
 
 * Java 11 preinstalled

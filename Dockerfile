@@ -32,10 +32,11 @@ RUN sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/j
 RUN cd /opt \
     && wget -q https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O android-commandline-tools.zip \
     && mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools \
-    && unzip -q android-commandline-tools.zip -d ${ANDROID_SDK_ROOT}/cmdline-tools \
-    && rm android-commandline-tools.zip
+    && unzip -q android-commandline-tools.zip -d /tmp/ \
+    && mv /tmp/cmdline-tools/ ${ANDROID_SDK_ROOT}/cmdline-tools/latest \
+    && rm android-commandline-tools.zip && ls -la ${ANDROID_SDK_ROOT}/cmdline-tools/latest/
 
-ENV PATH ${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin
+ENV PATH ${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin
 
 # ------------------------------------------------------
 # --- Install Android SDKs and other build packages

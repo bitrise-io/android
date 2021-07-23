@@ -30,7 +30,7 @@ RUN sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/j
 # --- Download Android Command line Tools into $ANDROID_SDK_ROOT
 
 RUN cd /opt \
-    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O android-commandline-tools.zip \
+    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip -O android-commandline-tools.zip \
     && mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools \
     && unzip -q android-commandline-tools.zip -d /tmp/ \
     && mv /tmp/cmdline-tools/ ${ANDROID_SDK_ROOT}/cmdline-tools/latest \
@@ -63,6 +63,7 @@ RUN yes | sdkmanager "emulator" "platform-tools"
 RUN yes | sdkmanager --update --channel=3
 # Please keep all sections in descending order!
 RUN yes | sdkmanager \
+    "platforms;android-31" \
     "platforms;android-30" \
     "platforms;android-29" \
     "platforms;android-28" \
@@ -76,6 +77,7 @@ RUN yes | sdkmanager \
     "platforms;android-19" \
     "platforms;android-17" \
     "platforms;android-15" \
+    "build-tools;31.0.0" \
     "build-tools;30.0.3" \
     "build-tools;30.0.2" \
     "build-tools;30.0.0" \
@@ -100,6 +102,7 @@ RUN yes | sdkmanager \
     "build-tools;21.1.2" \
     "build-tools;19.1.0" \
     "build-tools;17.0.0" \
+    "system-images;android-31;google_apis;x86" \
     "system-images;android-30;google_apis;x86" \
     "system-images;android-29;google_apis;x86" \
     "system-images;android-28;google_apis;x86_64" \
@@ -199,9 +202,9 @@ ENV LD_LIBRARY_PATH ${ANDROID_SDK_ROOT}/emulator/lib64:${ANDROID_SDK_ROOT}/emula
 # Tools to parse apk/aab info in deploy-to-bitrise-io step
 ENV APKINFO_TOOLS /opt/apktools
 RUN mkdir ${APKINFO_TOOLS}
-RUN wget -q https://github.com/google/bundletool/releases/download/1.4.0/bundletool-all-1.4.0.jar -O ${APKINFO_TOOLS}/bundletool.jar
+RUN wget -q https://github.com/google/bundletool/releases/download/1.7.0/bundletool-all-1.7.0.jar -O ${APKINFO_TOOLS}/bundletool.jar
 RUN cd /opt \
-    && wget -q https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2/4.1.1-6503028/aapt2-4.1.1-6503028-linux.jar -O aapt2.jar \
+    && wget -q https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2/4.2.2-7147631/aapt2-4.2.2-7147631-linux.jar -O aapt2.jar \
     && unzip -q aapt2.jar aapt2 -d ${APKINFO_TOOLS} \
     && rm aapt2.jar
 
@@ -211,5 +214,5 @@ RUN cd /opt \
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2020_12_15_1
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2021_07_23_1
 CMD bitrise -version

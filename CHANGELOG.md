@@ -1,5 +1,14 @@
 ## UPCOMING
 
+## `v2020_07_23_1`
+
+* new preinstalled package `build-tools-31.0.0`
+* new preinstalled package `platforms;android-31`
+* new preinstalled package `system-images;android-31;google_apis;x86`
+* bundletool updated to 1.7.0
+* aapt2 updated to 4.2.2-7147631
+* commandline tools updated to 7302050
+
 ## `v2020_12_15_1`
 
 * new preinstalled package `build-tools-30.0.3`

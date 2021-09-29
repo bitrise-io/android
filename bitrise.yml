@@ -96,17 +96,6 @@ workflows:
             docker build --pull --no-cache -t "${DOCKERHUB_IMG_ID}:latest" --file "${DOCKER_FILE_PATH}" .
 
             docker images
-    - script@1.1.0:
-        title: run platform_report.sh
-        inputs:
-        - content: |
-            #!/bin/bash
-            set -ex
-            docker run --rm \
-              -v "$(pwd)/system_report.sh:/bitrise/src/system_report.sh" \
-              -v "/var/run/docker.sock:/var/run/docker.sock" \
-              -v "$(which bitrise-bridge):/usr/local/bin/bitrise-bridge" \
-              "${DOCKERHUB_IMG_ID}:latest" bash /bitrise/src/system_report.sh
 
   _pinned_envs:
     envs:

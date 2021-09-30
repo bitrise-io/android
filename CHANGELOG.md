@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_09_29_1`
+* `Install stable version of sdkmanager`
+
 ## `v2021_09_29`
 * `Set Java 11 as default`
 

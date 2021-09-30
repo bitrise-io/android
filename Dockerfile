@@ -60,7 +60,7 @@ RUN yes | sdkmanager "emulator" "platform-tools"
 # Please keep these in descending order!
 # The `yes` is for accepting all non-standard tool licenses.
 
-RUN yes | sdkmanager --update --channel=3
+RUN yes | sdkmanager --update --channel=0
 # Please keep all sections in descending order!
 RUN yes | sdkmanager \
     "platforms;android-30" \
@@ -208,5 +208,5 @@ RUN cd /opt \
 # Cleaning
 RUN apt-get clean
 
-ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2021_09_29
+ENV BITRISE_DOCKER_REV_NUMBER_ANDROID v2021_09_29_1
 CMD bitrise -version

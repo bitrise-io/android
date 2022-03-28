@@ -63,6 +63,7 @@ RUN yes | sdkmanager "emulator" "platform-tools"
 RUN yes | sdkmanager --update --channel=0
 # Please keep all sections in descending order!
 RUN yes | sdkmanager \
+    "platforms;android-31" \
     "platforms;android-30" \
     "platforms;android-29" \
     "platforms;android-28" \
